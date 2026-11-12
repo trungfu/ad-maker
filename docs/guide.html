@@ -157,8 +157,19 @@ details.step .body { padding: 0 16px 14px 58px; font-size: 14.5px; }
 .kv { display: grid; grid-template-columns: 110px 1fr; gap: 4px 12px; margin-bottom: 10px; }
 .kv dt { color: var(--muted); font-size: 13px; }
 .kv dd { margin: 0; }
-.gate-bar { display: flex; align-items: center; gap: 10px; padding: 10px 14px; margin: 4px 0 14px; border-radius: 10px; background: var(--warn-soft); color: var(--warn); font-weight: 600; font-size: 14px; border: 1px dashed color-mix(in srgb, var(--warn) 45%, transparent); }
-.gate-bar span { font-weight: 400; color: var(--text); }
+.gate-box { border: 1px dashed color-mix(in srgb, var(--warn) 45%, transparent); background: var(--warn-soft); border-radius: 10px; padding: 12px 16px; margin: 4px 0 14px; font-size: 14px; }
+.gate-box .gt { font-weight: 700; color: var(--warn); }
+.gate-box .gt span { font-weight: 400; color: var(--muted); }
+.gate-box ul { margin: .4em 0 0; }
+.steps-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--muted); margin: 8px 0 10px; }
+details.step .body h5 { margin: 12px 0 4px; font-size: 13px; color: var(--brand); }
+.need { font-size: 14px; color: var(--muted); margin-bottom: .5em; }
+ol.todo { padding-left: 1.5em; margin-bottom: .8em; }
+ol.todo > li { margin: .45em 0; padding-left: .2em; }
+ol.todo ul { margin: .3em 0 0; }
+.role { display: inline-block; font-size: 11.5px; font-weight: 600; padding: 1px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); margin-right: 6px; white-space: nowrap; vertical-align: 1px; }
+.done-when { background: var(--ok-soft); color: var(--text); border-radius: 8px; padding: 8px 12px; font-size: 14px; margin: 0; }
+.done-when b { color: var(--ok); }
 
 /* rules */
 .rules { counter-reset: r; list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -290,14 +301,14 @@ footer { color: var(--muted); font-size: 13px; padding: 24px 0 8px; }
 
       <h3>Bộ kit gồm những gì</h3>
       <div class="grid">
-        <div class="card"><h4>📘 SOP</h4><p>Quy trình 9 bước, vai trò, lịch, chi phí, pháp lý, danh mục model.</p><a class="file-link" href="SOP.md">SOP.md</a></div>
-        <div class="card"><h4>📝 Brief</h4><p>Mẫu brief chiến dịch, có ký xác nhận của Brand Approver.</p><a class="file-link" href="templates/01-brief.md">templates/01-brief.md</a></div>
-        <div class="card"><h4>🎨 Brand Kit / Gem</h4><p>Thông tin thương hiệu + Instructions dán vào Gem viết kịch bản.</p><a class="file-link" href="templates/02-brand-kit-gem.md">templates/02-brand-kit-gem.md</a></div>
-        <div class="card"><h4>✍️ Cấu trúc prompt</h4><p>Prompt chuẩn cho ảnh, video Veo, nhạc Lyria, giọng đọc TTS.</p><a class="file-link" href="templates/03-prompt-structure.md">templates/03-prompt-structure.md</a></div>
-        <div class="card"><h4>📊 Workbook chiến dịch</h4><p>Shot list, Shot log tự tính chi phí, QC, Ngân sách, Giá model.</p><a class="file-link" href="templates/campaign-workbook.xlsx">templates/campaign-workbook.xlsx</a></div>
-        <div class="card"><h4>✅ Checklist QC</h4><p>47 mục: hàng không, an toàn bay, lỗi AI, thương hiệu, pháp lý, kỹ thuật.</p><a class="file-link" href="templates/06-qc-checklist.md">templates/06-qc-checklist.md</a></div>
-        <div class="card"><h4>🧪 Kế hoạch pilot</h4><p>Chuẩn bị một lần + chạy thử trên bộ social 15s trước khi áp dụng.</p><a class="file-link" href="pilot-plan.md">pilot-plan.md</a></div>
-        <div class="card"><h4>⚙️ Script workbook</h4><p>Sinh lại workbook khi đổi giá model hoặc checklist QC.</p><a class="file-link" href="../scripts/build_workbook.py">scripts/build_workbook.py</a></div>
+        <div class="card"><h4>📘 SOP</h4><p>Quy trình 9 bước, vai trò, lịch, chi phí, pháp lý, danh mục model.</p><a class="file-link" href="https://github.com/trungfu/ad-maker/blob/main/docs/SOP.md" target="_blank" rel="noopener">SOP.md</a></div>
+        <div class="card"><h4>📝 Brief</h4><p>Mẫu brief chiến dịch, có ký xác nhận của Brand Approver.</p><a class="file-link" href="https://github.com/trungfu/ad-maker/blob/main/docs/templates/01-brief.md" target="_blank" rel="noopener">templates/01-brief.md</a></div>
+        <div class="card"><h4>🎨 Brand Kit / Gem</h4><p>Thông tin thương hiệu + Instructions dán vào Gem viết kịch bản.</p><a class="file-link" href="https://github.com/trungfu/ad-maker/blob/main/docs/templates/02-brand-kit-gem.md" target="_blank" rel="noopener">templates/02-brand-kit-gem.md</a></div>
+        <div class="card"><h4>✍️ Cấu trúc prompt</h4><p>Prompt chuẩn cho ảnh, video Veo, nhạc Lyria, giọng đọc TTS.</p><a class="file-link" href="https://github.com/trungfu/ad-maker/blob/main/docs/templates/03-prompt-structure.md" target="_blank" rel="noopener">templates/03-prompt-structure.md</a></div>
+        <div class="card"><h4>📊 Workbook chiến dịch</h4><p>Shot list, Shot log tự tính chi phí, QC, Ngân sách, Giá model.</p><a class="file-link" href="https://github.com/trungfu/ad-maker/blob/main/docs/templates/campaign-workbook.xlsx" target="_blank" rel="noopener">templates/campaign-workbook.xlsx</a></div>
+        <div class="card"><h4>✅ Checklist QC</h4><p>47 mục: hàng không, an toàn bay, lỗi AI, thương hiệu, pháp lý, kỹ thuật.</p><a class="file-link" href="https://github.com/trungfu/ad-maker/blob/main/docs/templates/06-qc-checklist.md" target="_blank" rel="noopener">templates/06-qc-checklist.md</a></div>
+        <div class="card"><h4>🧪 Kế hoạch pilot</h4><p>Chuẩn bị một lần + chạy thử trên bộ social 15s trước khi áp dụng.</p><a class="file-link" href="https://github.com/trungfu/ad-maker/blob/main/docs/pilot-plan.md" target="_blank" rel="noopener">pilot-plan.md</a></div>
+        <div class="card"><h4>⚙️ Script workbook</h4><p>Sinh lại workbook khi đổi giá model hoặc checklist QC.</p><a class="file-link" href="https://github.com/trungfu/ad-maker/blob/main/scripts/build_workbook.py" target="_blank" rel="noopener">scripts/build_workbook.py</a></div>
       </div>
     </section>
 
@@ -317,7 +328,14 @@ footer { color: var(--muted); font-size: 13px; padding: 24px 0 8px; }
       <div class="tabpanel" role="tabpanel" data-panel="p">
         <div class="two-col">
           <div><h4>Bạn chịu trách nhiệm</h4><ul>
-            <li>Điều phối lịch 5 ngày và 3 cổng duyệt</li>
+            <li><b>Giữ cho chiến dịch xong đúng 5 ngày:</b> đầu mỗi ngày giao việc cho từng người theo <a href="#quy-trinh">lịch</a> (VD Ngày 1: Copywriter viết kịch bản, AI Artist làm storyboard). Cuối ngày kiểm tra xem việc đã xong chưa. Nếu trễ, báo ngày giao mới cho phía hãng.</li>
+            <li><b>Tổ chức 3 lần duyệt với phía hãng:</b>
+              <ul>
+                <li>Hẹn trước giờ duyệt với người duyệt (Brand, Legal).</li>
+                <li>Gửi đúng thứ cần duyệt: kịch bản + storyboard (lần 1), animatic (lần 2), bản cuối (lần 3).</li>
+                <li>Gom mọi góp ý thành <b>một</b> danh sách sửa duy nhất, chuyển cho team.</li>
+                <li>Ghi lại ai đã đồng ý, vào lúc nào.</li>
+              </ul></li>
             <li>Brief, Shot log, ngân sách, đóng gói file giao</li>
             <li>Thiết lập lần đầu (Ngày 0) và tạo Gem Brand Kit</li>
             <li>Rà soát Model Registry <b>hằng tháng</b></li>
@@ -424,7 +442,8 @@ footer { color: var(--muted); font-size: 13px; padding: 24px 0 8px; }
     <!-- ============ QUY TRÌNH ============ -->
     <section id="quy-trinh">
       <h2>Quy trình 9 bước</h2>
-      <p class="lead">Lịch chuẩn 5 ngày. Mỗi cổng duyệt được tối đa 1 vòng sửa trong ngày; quá thì lịch lùi theo.</p>
+      <p class="lead">Lịch chuẩn 5 ngày, có 3 cổng duyệt.</p>
+      <div class="callout info"><strong>🚦 "Cổng duyệt" là gì?</strong>Là điểm dừng bắt buộc: team gửi kết quả cho phía hãng xem, và <b>chỉ được làm bước tiếp theo khi phía hãng đồng ý</b>. Mục đích là phát hiện chỗ chưa ổn sớm, trước khi tốn tiền và công sức ở các bước sau. Ví dụ: kịch bản chưa được duyệt thì chưa tạo video.<br>Mỗi cổng được sửa tối đa <b>1 lần trong ngày</b>. Nếu phía hãng cần sửa thêm, lịch giao lùi lại tương ứng.</div>
       <div class="days">
         <div class="day"><b>Ngày 1</b>Brief → Ý tưởng → Kịch bản + Shot list → Storyboard<br><span class="gate">🚦 Cổng 1</span></div>
         <div class="day"><b>Ngày 2</b>Production Bible → Animatic + VO nháp<br><span class="gate">🚦 Cổng 2</span></div>
@@ -432,38 +451,178 @@ footer { color: var(--muted); font-size: 13px; padding: 24px 0 8px; }
         <div class="day"><b>Ngày 4</b>Hero shot 9:16 → Dựng master → Màu → Đồ hoạ → Mix</div>
         <div class="day"><b>Ngày 5</b>Bản 15s/6s, bản EN → QC toàn bộ → Giao<br><span class="gate">🚦 Cổng 3</span></div>
       </div>
-      <p style="font-size:13px;color:var(--muted)">Bấm vào từng bước để xem chi tiết.</p>
+      <div class="steps-toolbar"><span>Bấm vào từng bước để xem việc cần làm.</span><button class="icon-btn" id="toggleSteps" type="button">Mở tất cả</button></div>
 
-      <details class="step"><summary><span class="num">1</span><span class="title">Brief<span class="sub">Producer + Brand Approver</span></span></summary>
-        <div class="body"><dl class="kv"><dt>Template</dt><dd><a href="templates/01-brief.md">01-brief.md</a></dd><dt>Đầu ra</dt><dd>Brief có chữ ký Brand Approver</dd><dt>Lưu ý</dt><dd>Có giá/khuyến mãi → gửi Legal xem điều kiện <b>ngay bây giờ</b>, đừng đợi cổng 3. Ghi rõ <b>dòng máy bay</b> khai thác đường bay.</dd></dl></div>
+      <details class="step"><summary><span class="num">1</span><span class="title">Brief<span class="sub">Ngày 1 · sáng · Producer + Brand Approver</span></span></summary>
+        <div class="body">
+          <p class="need"><b>Cần có trước:</b> yêu cầu chiến dịch từ phía hãng.</p>
+          <ol class="todo">
+            <li><span class="role">Producer</span>Tạo thư mục chiến dịch trên Shared Drive theo <a href="#file">cấu trúc chuẩn</a>. Đặt <b>mã chiến dịch</b> (VD <code>DAD25</code>) — mã này dùng trong mọi tên file.</li>
+            <li><span class="role">Producer</span>Copy workbook mẫu vào thư mục, đổi tên thành <code>DAD25_workbook</code>.</li>
+            <li><span class="role">Producer</span>Copy mẫu <a href="templates/01-brief.md">01-brief.md</a> sang Google Docs trong <code>00_brief/</code>.</li>
+            <li><span class="role">Producer</span><span class="role">Brand</span>Ngồi cùng nhau điền brief. Bắt buộc có: mục tiêu, <b>thông điệp chính trong 1 câu</b>, CTA, đường bay, <b>dòng máy bay</b> khai thác đường bay đó, kênh phát, tư liệu thật đang có.</li>
+            <li><span class="role">Producer</span>Nếu có giá hoặc khuyến mãi: gửi ngay phần điều kiện cho Legal xem, không đợi đến cuối.</li>
+            <li><span class="role">Brand</span>Ký xác nhận ở cuối brief.</li>
+          </ol>
+          <p class="done-when"><b>Xong khi:</b> brief có chữ ký Brand Approver; thư mục và workbook đã sẵn sàng.</p>
+        </div>
       </details>
-      <details class="step"><summary><span class="num">2</span><span class="title">Ý tưởng &amp; kịch bản<span class="sub">Copywriter · Gem Brand Kit</span></span></summary>
-        <div class="body"><dl class="kv"><dt>Công cụ</dt><dd>Gem Brand Kit (Gemini)</dd><dt>Đầu ra</dt><dd>Kịch bản 30s + sheet <code>Shot list</code></dd><dt>Cách làm</dt><dd>Brief → Gem đề xuất 3–5 hướng → chọn 1 → Gem viết kịch bản + shot list → CW chỉnh VO. Đánh dấu 3–5 hero shot; các shot khác bố cục center-safe.</dd></dl></div>
+
+      <details class="step"><summary><span class="num">2</span><span class="title">Ý tưởng &amp; kịch bản<span class="sub">Ngày 1 · Copywriter + Producer · dùng Gem Brand Kit</span></span></summary>
+        <div class="body">
+          <p class="need"><b>Cần có trước:</b> brief đã ký, Gem Brand Kit đã tạo.</p>
+          <ol class="todo">
+            <li><span class="role">Copywriter</span>Mở Gem, dán toàn bộ brief, yêu cầu: <i>"Đề xuất 3–5 hướng ý tưởng"</i>.</li>
+            <li><span class="role">Copywriter</span><span class="role">Producer</span>Đọc các hướng, loại hướng Gem đánh giá <b>rủi ro AI cao</b>, chọn 1 hướng. Nếu phân vân, gửi 2 hướng tốt nhất để Brand chọn.</li>
+            <li><span class="role">Copywriter</span>Yêu cầu Gem: <i>"Viết kịch bản 30s và shot list cho hướng số …"</i>.</li>
+            <li><span class="role">Copywriter</span>Đọc to lời VO, sửa cho tự nhiên. Bấm giờ: VO không quá ~24 giây.</li>
+            <li><span class="role">Copywriter</span>Soát shot list:
+              <ul>
+                <li>Shot có tàu bay → nguồn <b>THẬT</b> hoặc <b>HYBRID</b>.</li>
+                <li>Shot có tiếp viên → chỉ góc xa/từ phía sau, hoặc nguồn THẬT.</li>
+                <li>Mọi chữ hiện trên màn hình nằm ở cột riêng, không nằm trong mô tả hình.</li>
+                <li>Đánh dấu 3–5 <b>hero shot</b> (shot đẹp nhất, sẽ làm cả bản dọc 9:16).</li>
+              </ul></li>
+            <li><span class="role">Copywriter</span>Dán shot list vào sheet <code>Shot list</code> của workbook.</li>
+          </ol>
+          <p class="done-when"><b>Xong khi:</b> có kịch bản và sheet Shot list đầy đủ.</p>
+        </div>
       </details>
-      <details class="step"><summary><span class="num">3</span><span class="title">Storyboard<span class="sub">AI Artist · Nano Banana 2.1</span></span></summary>
-        <div class="body"><dl class="kv"><dt>Đầu ra</dt><dd>Storyboard PDF: 1 khung/shot, kèm lời VO</dd><dt>Lưu ý</dt><dd>Dùng model rẻ, nhanh — đây là bản nháp để duyệt ý, chưa cần đẹp.</dd></dl></div>
+
+      <details class="step"><summary><span class="num">3</span><span class="title">Storyboard<span class="sub">Ngày 1 · chiều · AI Artist · dùng Nano Banana 2.1</span></span></summary>
+        <div class="body">
+          <p class="need"><b>Cần có trước:</b> sheet Shot list.</p>
+          <ol class="todo">
+            <li><span class="role">AI Artist</span>Với mỗi shot, tạo <b>1 khung hình 16:9</b> bằng Nano Banana 2.1 dựa trên cột mô tả hình. Có thể nhờ Gem viết prompt.</li>
+            <li><span class="role">AI Artist</span>Không cần đẹp — chỉ cần đúng bố cục, góc máy và nội dung để người duyệt hình dung được.</li>
+            <li><span class="role">AI Artist</span>Ghi mỗi lần tạo vào <code>Shot log</code> (chọn <code>model_key</code> = <code>nb21_1k</code>).</li>
+            <li><span class="role">AI Artist</span>Ghép thành Google Slides: mỗi slide 1 shot, ghi mã shot, thời lượng, lời VO, chữ trên màn hình. Xuất PDF vào <code>01_script_storyboard/</code>.</li>
+          </ol>
+          <p class="done-when"><b>Xong khi:</b> có file storyboard PDF để gửi duyệt.</p>
+        </div>
       </details>
-      <div class="gate-bar">🚦 Cổng 1 — Kịch bản + Storyboard <span>· Brand Approver</span></div>
-      <details class="step"><summary><span class="num">4</span><span class="title">Production Bible + Animatic<span class="sub">AI Artist + Editor · Nano Banana Pro, Gemini TTS</span></span></summary>
-        <div class="body"><dl class="kv"><dt>Bible</dt><dd>Ảnh thật tàu bay/cabin · character sheet 2–4 hành khách AI · ảnh điểm đến · 3–5 style frame · khung đầu từng shot (hero shot: cả 16:9 và 9:16). Lưu ở <code>02_bible/</code>.</dd><dt>Animatic</dt><dd>Khung đầu + VO nháp TTS + nhạc nháp, đúng thời lượng. Mục đích: bắt lỗi nhịp <b>trước khi</b> tốn tiền render.</dd></dl></div>
+
+      <div class="gate-box">
+        <div class="gt">🚦 Cổng duyệt 1 — Kịch bản + Storyboard <span>· cuối Ngày 1</span></div>
+        <ul>
+          <li><b>Producer gửi:</b> kịch bản + storyboard PDF.</li>
+          <li><b>Brand Approver xem:</b> ý tưởng có đúng thông điệp không, lời VO, thứ tự các cảnh.</li>
+          <li><b>Producer:</b> gom góp ý thành một danh sách → Copywriter/AI Artist sửa trong ngày → Brand đồng ý thì sang Bước 4.</li>
+        </ul>
+      </div>
+
+      <details class="step"><summary><span class="num">4</span><span class="title">Production Bible + Animatic<span class="sub">Ngày 2 · AI Artist + Editor · dùng Nano Banana Pro, Gemini TTS, Lyria</span></span></summary>
+        <div class="body">
+          <p class="need"><b>Cần có trước:</b> kịch bản và storyboard đã qua Cổng 1; ảnh/footage thật của hãng.</p>
+          <h5>4a. Production Bible — bộ ảnh tham chiếu để mọi shot trông nhất quán</h5>
+          <ol class="todo">
+            <li><span class="role">AI Artist</span>Chọn ảnh thật tàu bay (<b>đúng dòng máy bay</b> trong brief) và cabin → <code>02_bible/aircraft/</code>.</li>
+            <li><span class="role">AI Artist</span>Tạo <b>character sheet</b> cho 2–4 hành khách bằng Nano Banana Pro (dùng <a href="#tpl-prompt">prompt mẫu</a>). Đặt mã <code>CH01</code>, <code>CH02</code>… → <code>characters/</code>.</li>
+            <li><span class="role">AI Artist</span>Tạo 3–5 <b>style frame</b> chốt màu sắc, ánh sáng → <code>style/</code>. Gom ảnh điểm đến → <code>locations/</code>.</li>
+            <li><span class="role">AI Artist</span>Tạo <b>khung đầu</b> cho từng shot bằng Nano Banana Pro, đính kèm ảnh nhân vật, tàu bay, style frame. Hero shot: làm cả 16:9 và 9:16 → <code>first_frames/</code>.</li>
+            <li><span class="role">AI Artist</span>Ghi tất cả vào Shot log; điền tên file khung đầu vào cột <code>first_frame</code> của Shot list.</li>
+          </ol>
+          <h5>4b. Animatic — "phim nháp" bằng ảnh tĩnh để duyệt nhịp</h5>
+          <ol class="todo" start="6">
+            <li><span class="role">AI Artist</span>Tạo giọng đọc nháp bằng Gemini TTS từ lời VO; tạo 1–2 bản nhạc nháp bằng Lyria.</li>
+            <li><span class="role">Editor</span>Đặt các khung đầu lên timeline Premiere, mỗi khung đúng thời lượng của shot; ghép VO và nhạc nháp.</li>
+            <li><span class="role">Editor</span>Shot có chuyển động khó hình dung: thay bằng clip nháp rẻ (Veo Fast hoặc Omni).</li>
+            <li><span class="role">Editor</span>Xem lại: VO có vừa thời lượng không? Nhịp có bị nhanh/chậm không? Xuất MP4 vào <code>03_animatic/</code>.</li>
+          </ol>
+          <p class="done-when"><b>Xong khi:</b> Bible đủ các mục và có file animatic 30s.</p>
+        </div>
       </details>
-      <div class="gate-bar">🚦 Cổng 2 — Animatic <span>· Brand + quản lý marketing · sau cổng này khoá shot list</span></div>
-      <details class="step"><summary><span class="num">5</span><span class="title">Tạo shot video<span class="sub">AI Artist · Veo 3.1 Fast → Standard</span></span></summary>
-        <div class="body"><dl class="kv"><dt>Cách làm</dt><dd>Luôn image-to-video từ khung đầu. Prompt tiếng Anh theo cấu trúc chuẩn. <b>Tắt âm thanh Veo</b> mặc định (rẻ hơn ~50%). Theo giới hạn 3+3 lần.</dd><dt>Ghi chép</dt><dd>Mọi lần tạo → 1 dòng Shot log</dd><dt>QC</dt><dd>Shot chọn → QC phần A–C → đạt mới vào <code>04_shots/selects/</code></dd></dl></div>
+
+      <div class="gate-box">
+        <div class="gt">🚦 Cổng duyệt 2 — Animatic <span>· cuối Ngày 2</span></div>
+        <ul>
+          <li><b>Producer gửi:</b> animatic + character sheet + style frame.</li>
+          <li><b>Brand Approver + quản lý marketing xem:</b> nhịp phim, thời lượng, nhân vật, màu sắc.</li>
+          <li><b>Sau khi đồng ý:</b> Producer <b>khoá shot list</b> (cột <code>status</code> = <code>locked</code>). Từ đây muốn thêm shot phải tính lại chi phí và thời gian.</li>
+        </ul>
+      </div>
+
+      <details class="step"><summary><span class="num">5</span><span class="title">Tạo shot video<span class="sub">Ngày 3–4 · AI Artist + QC Reviewer · dùng Veo 3.1 Fast → Standard</span></span></summary>
+        <div class="body">
+          <p class="need"><b>Cần có trước:</b> shot list đã khoá, khung đầu đã duyệt.</p>
+          <p style="margin-bottom:.4em">Lặp lại cho <b>từng shot</b>:</p>
+          <ol class="todo">
+            <li><span class="role">AI Artist</span>Viết prompt <b>tiếng Anh</b> theo <a href="#tpl-prompt">mẫu Veo</a> (có thể nhờ Gem). Đính kèm khung đầu (+ khung cuối nếu cần) và ảnh nhân vật.</li>
+            <li><span class="role">AI Artist</span>Tạo <b>bản nháp</b> bằng Veo 3.1 Fast 720p, <b>tắt âm thanh</b>. Tối đa <b>3 lần</b>, đến khi bố cục và chuyển động đúng ý.</li>
+            <li><span class="role">AI Artist</span>Giữ nguyên prompt, khung đầu và <b>seed</b> của bản nháp tốt nhất → tạo <b>bản cuối</b> bằng Veo 3.1 Standard 1080p. Tối đa <b>3 lần</b>.</li>
+            <li><span class="role">AI Artist</span>Ghi <b>mọi</b> lần tạo vào Shot log — lần hỏng thì ghi lý do loại.</li>
+            <li><span class="role">AI Artist</span>Hết 3 + 3 lần vẫn hỏng → <b>dừng</b>, báo Producer chọn: làm lại shot đơn giản hơn / đổi khung đầu / dùng footage thật.</li>
+            <li><span class="role">QC</span>Shot ưng ý → <b>người khác</b> (QC Reviewer) kiểm phần A–C của <a href="#tpl-qc">checklist QC</a>. Đạt → chuyển file vào <code>04_shots/selects/</code>, ghi <code>qc_status</code> = <code>pass</code>.</li>
+            <li><span class="role">AI Artist</span>Hero shot: làm thêm một lần cho tỉ lệ dọc 9:16.</li>
+            <li><span class="role">Producer</span>Cuối mỗi ngày mở sheet <code>Ngân sách</code> xem đã chi bao nhiêu.</li>
+          </ol>
+          <p class="done-when"><b>Xong khi:</b> mọi shot trong shot list đều có một bản đạt QC trong <code>selects/</code>.</p>
+        </div>
       </details>
-      <details class="step"><summary><span class="num">6</span><span class="title">Âm thanh<span class="sub">AI Artist + Editor · Lyria, Gemini TTS</span></span></summary>
-        <div class="body"><dl class="kv"><dt>Nhạc</dt><dd>Lyria, <b>chỉ nhạc không lời</b>, tạo 3–5 phương án</dd><dt>Giọng đọc</dt><dd>Gemini TTS cho 15s/6s; master 30s có thể dùng giọng người thật</dd><dt>Sonic logo</dt><dd>File thật của hãng, luôn ở cuối</dd></dl></div>
+
+      <details class="step"><summary><span class="num">6</span><span class="title">Âm thanh<span class="sub">Ngày 3 · AI Artist + Editor · dùng Lyria, Gemini TTS</span></span></summary>
+        <div class="body">
+          <p class="need"><b>Cần có trước:</b> lời VO tiếng Việt và tiếng Anh đã chốt.</p>
+          <ol class="todo">
+            <li><span class="role">AI Artist</span>Tạo 3–5 bản nhạc <b>không lời</b> bằng Lyria, dài khớp phim → <code>05_audio/music/</code>. Producer và Copywriter chọn 1.</li>
+            <li><span class="role">AI Artist</span>Tạo giọng đọc bằng Gemini TTS với giọng thương hiệu đã chọn, cả <b>tiếng Việt và tiếng Anh</b> → <code>05_audio/vo/</code>.</li>
+            <li><span class="role">Producer</span>Bản master 30s: quyết cùng Brand dùng TTS hay thu giọng người thật.</li>
+            <li><span class="role">Editor</span>Lấy <b>sonic logo</b> (đoạn nhạc nhận diện) thật của hãng và SFX (tiếng động) từ thư viện có bản quyền → <code>05_audio/sfx/</code>.</li>
+          </ol>
+          <p class="done-when"><b>Xong khi:</b> có nhạc, VO tiếng Việt + tiếng Anh, SFX và sonic logo.</p>
+        </div>
       </details>
-      <details class="step"><summary><span class="num">7</span><span class="title">Hậu kỳ<span class="sub">Editor · Premiere + After Effects</span></span></summary>
-        <div class="body"><dl class="kv"><dt>Cách làm</dt><dd>Dựng theo animatic → màu theo style frame → đồ hoạ từ MOGRT (logo, giá, CTA, phụ đề, end card có nhãn AI) → mix</dd><dt>QC</dt><dd>Phần D–F trên bản dựng</dd></dl></div>
+
+      <details class="step"><summary><span class="num">7</span><span class="title">Hậu kỳ<span class="sub">Ngày 4 · Editor + QC Reviewer · dùng Premiere + After Effects</span></span></summary>
+        <div class="body">
+          <p class="need"><b>Cần có trước:</b> các shot đã đạt QC trong <code>selects/</code>, âm thanh từ Bước 6.</p>
+          <ol class="todo">
+            <li><span class="role">Editor</span>Dựng các shot theo đúng animatic đã duyệt.</li>
+            <li><span class="role">Editor</span>Chỉnh màu để các shot trông đồng nhất, theo style frame.</li>
+            <li><span class="role">Editor</span>Thêm đồ hoạ từ template MOGRT: logo, giá + điều kiện, CTA, tên điểm đến, phụ đề, end card (có sẵn <b>nhãn AI</b>).</li>
+            <li><span class="role">Editor</span>Mix âm thanh: VO, nhạc, SFX, sonic logo ở cuối; đo âm lượng theo chuẩn.</li>
+            <li><span class="role">Editor</span>Xuất bản master <b>M30-VI</b> → <code>06_edit/exports/</code>.</li>
+            <li><span class="role">QC</span>Kiểm phần D–F của checklist QC; Editor sửa đến khi đạt.</li>
+          </ol>
+          <p class="done-when"><b>Xong khi:</b> bản master 30s tiếng Việt đạt QC nội bộ.</p>
+        </div>
       </details>
-      <details class="step"><summary><span class="num">8</span><span class="title">Phiên bản<span class="sub">Editor + Copywriter</span></span></summary>
-        <div class="body"><dl class="kv"><dt>9:16</dt><dd>Hero shot 9:16 + crop shot center-safe; kiểm vùng an toàn</dd><dt>Tiếng Anh</dt><dd>Giữ nguyên hình; thay VO, phụ đề, chữ trên màn hình</dd><dt>Đầu ra</dt><dd>6 file: M30, C15, C06 × VI/EN</dd></dl></div>
+
+      <details class="step"><summary><span class="num">8</span><span class="title">Làm các phiên bản<span class="sub">Ngày 5 · sáng · Editor + Copywriter</span></span></summary>
+        <div class="body">
+          <p class="need"><b>Cần có trước:</b> master M30-VI đạt QC; hero shot 9:16.</p>
+          <ol class="todo">
+            <li><span class="role">Editor</span>Dựng bản <b>15s dọc (C15)</b>: dùng hero shot 9:16 + cắt khung các shot khác. Đặt chữ, logo trong vùng an toàn (không bị nút của TikTok/Reels che).</li>
+            <li><span class="role">Editor</span>Dựng bản <b>6s dọc (C06)</b>: 1–2 shot mạnh nhất + end card.</li>
+            <li><span class="role">Copywriter</span>Chuyển thể lời VO và chữ trên màn hình sang tiếng Anh — viết lại cho tự nhiên, không dịch máy nguyên văn.</li>
+            <li><span class="role">Editor</span>Làm bản <b>tiếng Anh</b> cho cả 3 độ dài: giữ nguyên hình, thay VO, phụ đề, chữ trên màn hình.</li>
+            <li><span class="role">Editor</span>Xuất đủ <b>6 file</b> theo thông số trong SOP mục 2, đặt tên đúng <a href="#file">quy ước</a>.</li>
+          </ol>
+          <p class="done-when"><b>Xong khi:</b> có đủ 6 file: M30, C15, C06 × tiếng Việt / tiếng Anh.</p>
+        </div>
       </details>
-      <details class="step"><summary><span class="num">9</span><span class="title">QC &amp; giao file<span class="sub">QC Reviewer + Producer</span></span></summary>
-        <div class="body"><dl class="kv"><dt>Cách làm</dt><dd>QC toàn bộ checklist trên cả 6 file (sheet <code>QC</code>) → Producer đóng gói <code>07_deliverables/</code> + Shot log + báo cáo chi phí</dd></dl></div>
+
+      <details class="step"><summary><span class="num">9</span><span class="title">QC cuối &amp; giao file<span class="sub">Ngày 5 · QC Reviewer + Producer</span></span></summary>
+        <div class="body">
+          <p class="need"><b>Cần có trước:</b> đủ 6 file từ Bước 8.</p>
+          <ol class="todo">
+            <li><span class="role">QC</span>Xem từng file trên <b>điện thoại</b> (bản dọc) và <b>màn hình lớn</b> (bản ngang). Chấm toàn bộ checklist trong sheet <code>QC</code>.</li>
+            <li><span class="role">Editor</span>Sửa các mục bị đánh Lỗi; QC kiểm lại.</li>
+            <li><span class="role">Producer</span>Đóng gói <code>07_deliverables/</code>: 6 file + file phụ đề SRT. Gửi kèm Shot log và báo cáo chi phí.</li>
+          </ol>
+          <p class="done-when"><b>Xong khi:</b> sheet QC không còn mục Lỗi ở phần A, B, E.</p>
+        </div>
       </details>
-      <div class="gate-bar">🚦 Cổng 3 — Bản cuối <span>· Brand <b>và</b> Legal, bắt buộc cả hai</span></div>
+
+      <div class="gate-box">
+        <div class="gt">🚦 Cổng duyệt 3 — Bản cuối <span>· Ngày 5 · cần cả Brand và Legal</span></div>
+        <ul>
+          <li><b>Producer gửi:</b> 6 file + sheet QC.</li>
+          <li><b>Brand Approver xem:</b> đúng thương hiệu, đúng thông điệp.</li>
+          <li><b>Legal xem:</b> giá và điều kiện khuyến mãi, các câu khẳng định ("nhất", "duy nhất"), dòng máy bay/đường bay đúng thực tế, nhãn AI, quyền dùng ảnh, nhạc, tư liệu.</li>
+          <li><b>Cả hai đồng ý:</b> giao file. Khi đăng lên YouTube/Google Ads, Meta, TikTok, nhớ <b>bật khai báo nội dung AI</b> của từng nền tảng.</li>
+        </ul>
+      </div>
     </section>
 
     <!-- ============ NGUYÊN TẮC ============ -->
@@ -756,6 +915,15 @@ Chuyển thể (không dịch nguyên văn) lời VO và chữ trên màn hình 
     }, { rootMargin: '-80px 0px -65% 0px' });
     document.querySelectorAll('main section').forEach(function (s) { io.observe(s); });
   }
+
+  // ---------- expand/collapse steps ----------
+  var tsBtn = document.getElementById('toggleSteps');
+  tsBtn.addEventListener('click', function () {
+    var steps = document.querySelectorAll('details.step');
+    var anyClosed = Array.prototype.some.call(steps, function (d) { return !d.open; });
+    steps.forEach(function (d) { d.open = anyClosed; });
+    tsBtn.textContent = anyClosed ? 'Thu gọn tất cả' : 'Mở tất cả';
+  });
 
   // ---------- role tabs ----------
   var tabs = document.querySelectorAll('#roleTabs .tab');

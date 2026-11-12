@@ -57,7 +57,7 @@ Một người có thể kiêm nhiều vai, **trừ QC Reviewer**: không đư�
 
 | Vai trò | Ký hiệu | Trách nhiệm chính |
 |---|---|---|
-| Producer | **P** | Điều phối lịch, ngân sách, Shot log, giao file; sở hữu SOP và Model Registry |
+| Producer | **P** | Giao việc hằng ngày theo lịch 5 ngày và báo hạn mới nếu trễ; tổ chức 3 cổng duyệt (hẹn người duyệt, gửi đúng thứ cần duyệt, gom góp ý thành một danh sách sửa, ghi lại ai đồng ý lúc nào); quản lý ngân sách, Shot log, giao file; sở hữu SOP và Model Registry |
 | Creative / Copywriter | **CW** | Ý tưởng, kịch bản, lời VO, chữ trên màn hình (VI + EN) |
 | AI Artist | **AI** | Production Bible, storyboard, tạo shot video, nhạc, giọng đọc AI |
 | Editor | **ED** | Animatic, dựng, màu, đồ hoạ, mix, phiên bản, xuất file |

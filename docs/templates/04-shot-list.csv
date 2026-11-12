@@ -1,0 +1,3 @@
+﻿shot_id,duration_s,description,camera,source,hero,ratios,used_in,vo_vi,vo_en,onscreen_vi,onscreen_en,sfx,bible_refs,first_frame,status,notes
+S01,6,Tàu bay A321neo của hãng lăn ra đường băng lúc bình minh,"Locked-off, góc thấp ngang càng đáp",HYBRID,Y,16:9+9:16,"M30,C15,C06",Mỗi chuyến bay là một khởi đầu.,Every flight is a new beginning.,,,Tiếng động cơ tăng dần,"AC01, STY01",DAD25_S01_FF_169_nbpro_v02.png,todo,VÍ DỤ — xoá trước khi dùng. Nếu 3+3 lần méo tàu bay → footage thật
+S02,4,"CH01 nhìn ra cửa sổ, nắng sớm chiếu lên mặt, mỉm cười","Slow dolly in, 50mm",AI,N,16:9,"M30,C15",,,Đà Nẵng — chỉ từ 499.000đ*,"Da Nang — from 499,000 VND*",Tiếng cabin nhẹ,"CH01, CAB01, STY01",DAD25_S02_FF_169_nbpro_v01.png,todo,VÍ DỤ — center-safe để crop 9:16. Giá chờ Legal xác nhận

@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hướng dẫn Ad Kit</title>
+<meta name="description" content="Hướng dẫn sử dụng bộ kit sản xuất video quảng cáo hàng không bằng AI của Google: SOP, template, workbook và pilot.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f8fb;
+  --surface: #ffffff;
+  --surface-2: #eef2f8;
+  --text: #142033;
+  --muted: #5a6880;
+  --border: #dbe2ec;
+  --brand: #12366b;
+  --accent: #1f7ae0;
+  --accent-soft: #e3effd;
+  --ok: #17803d;
+  --ok-soft: #e3f5e9;
+  --warn: #a55b00;
+  --warn-soft: #fdf1df;
+  --bad: #b42318;
+  --bad-soft: #fde8e6;
+  --code-bg: #0f1b2d;
+  --code-text: #dfe7f3;
+  --shadow: 0 1px 2px rgba(16, 32, 60, .06), 0 4px 16px rgba(16, 32, 60, .06);
+  --radius: 12px;
+  --font: "Be Vietnam Pro", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b1220; --surface: #121b2c; --surface-2: #18233a; --text: #e6ecf5; --muted: #9aa8bf;
+    --border: #26324a; --brand: #8fb8ff; --accent: #5aa2ff; --accent-soft: #16294a;
+    --ok: #4cc77a; --ok-soft: #12301f; --warn: #f0a53c; --warn-soft: #33240e; --bad: #ff7b6e; --bad-soft: #3a1714;
+    --code-bg: #070d18; --code-text: #dfe7f3; --shadow: 0 1px 2px rgba(0,0,0,.4); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b1220; --surface: #121b2c; --surface-2: #18233a; --text: #e6ecf5; --muted: #9aa8bf;
+  --border: #26324a; --brand: #8fb8ff; --accent: #5aa2ff; --accent-soft: #16294a;
+  --ok: #4cc77a; --ok-soft: #12301f; --warn: #f0a53c; --warn-soft: #33240e; --bad: #ff7b6e; --bad-soft: #3a1714;
+  --code-bg: #070d18; --code-text: #dfe7f3; --shadow: 0 1px 2px rgba(0,0,0,.4); color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 15.5px/1.65 var(--font); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+code { font-family: var(--mono); font-size: .88em; background: var(--surface-2); padding: .1em .35em; border-radius: 5px; }
+h1, h2, h3, h4 { line-height: 1.3; margin: 0 0 .5em; }
+h2 { font-size: 1.55rem; color: var(--brand); }
+h3 { font-size: 1.12rem; margin-top: 1.6em; }
+p { margin: 0 0 1em; }
+ul, ol { padding-left: 1.3em; margin: 0 0 1em; }
+li { margin: .2em 0; }
+
+/* top bar */
+.topbar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 12px; height: 56px; padding: 0 16px;
+  background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+.topbar .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--brand); }
+.topbar .logo svg { width: 26px; height: 26px; }
+.topbar .spacer { flex: 1; }
+.icon-btn { border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 8px; height: 36px; padding: 0 10px;
+  font: inherit; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.icon-btn:hover { background: var(--surface-2); }
+#navToggle { display: none; }
+
+/* layout */
+.layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); max-width: 1180px; margin: 0 auto; gap: 36px; padding: 0 24px; }
+nav.toc { position: sticky; top: 72px; align-self: start; max-height: calc(100vh - 88px); overflow: auto; padding: 24px 0; }
+nav.toc a { display: block; padding: 6px 12px; border-radius: 8px; color: var(--muted); font-size: 14px; border-left: 2px solid transparent; }
+nav.toc a:hover { background: var(--surface-2); text-decoration: none; color: var(--text); }
+nav.toc a.active { color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+nav.toc .toc-label { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 0 12px 8px; }
+main { padding: 24px 0 80px; min-width: 0; }
+section { padding: 28px 0 8px; border-bottom: 1px solid var(--border); }
+section:last-of-type { border-bottom: 0; }
+.lead { font-size: 1.05rem; color: var(--muted); }
+
+/* hero */
+.hero { background: linear-gradient(135deg, #12366b 0%, #1f5fb8 60%, #3d8be8 100%); color: #fff; border-radius: 18px; padding: 36px 32px; position: relative; overflow: hidden; }
+.hero h1 { font-size: 2rem; margin-bottom: .35em; color: #fff; }
+.hero p { color: rgba(255,255,255,.88); max-width: 640px; }
+.hero .plane { position: absolute; right: -10px; bottom: -20px; width: 240px; opacity: .15; }
+.hero .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; padding: 4px 10px; border-radius: 999px; background: rgba(255,255,255,.16); color: #fff; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
+.stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; box-shadow: var(--shadow); }
+.stat b { display: block; font-size: 1.5rem; color: var(--brand); }
+.stat span { font-size: 13px; color: var(--muted); }
+
+/* cards */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin: 16px 0; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow); }
+.card h4 { margin: 0 0 .3em; font-size: 1rem; }
+.card p { font-size: 14px; color: var(--muted); margin: 0 0 .6em; }
+.card .who { font-size: 12px; color: var(--muted); }
+.file-link { font-family: var(--mono); font-size: 13px; }
+.tag { display: inline-block; font-size: 11.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); margin-right: 4px; }
+.tag.ok { background: var(--ok-soft); color: var(--ok); }
+.tag.warn { background: var(--warn-soft); color: var(--warn); }
+.tag.bad { background: var(--bad-soft); color: var(--bad); }
+
+/* callouts */
+.callout { border-radius: var(--radius); padding: 14px 16px; margin: 16px 0; border: 1px solid; font-size: 14.5px; }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+.callout.info { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 30%, transparent); }
+.callout.warn { background: var(--warn-soft); border-color: color-mix(in srgb, var(--warn) 30%, transparent); }
+.callout.bad { background: var(--bad-soft); border-color: color-mix(in srgb, var(--bad) 30%, transparent); }
+.callout strong:first-child { display: block; margin-bottom: 4px; }
+
+/* tabs */
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+.tab { border: 1px solid var(--border); background: var(--surface); color: var(--text); padding: 7px 14px; border-radius: 999px; font: inherit; font-size: 14px; cursor: pointer; }
+.tab[aria-selected="true"] { background: var(--brand); color: #fff; border-color: var(--brand); }
+:root[data-theme="dark"] .tab[aria-selected="true"] { color: #0b1220; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tab[aria-selected="true"] { color: #0b1220; } }
+.tabpanel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; box-shadow: var(--shadow); }
+.tabpanel[hidden] { display: none; }
+.tabpanel h4 { margin-top: 0; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+/* checklist */
+.checklist { list-style: none; padding: 0; margin: 12px 0; }
+.checklist li { display: flex; gap: 12px; align-items: flex-start; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); margin-bottom: 8px; }
+.checklist input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--ok); flex: none; }
+.checklist label { flex: 1; cursor: pointer; }
+.checklist li.done label { color: var(--muted); text-decoration: line-through; }
+.checklist .who { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.checklist .blocker { font-size: 11px; font-weight: 600; color: var(--bad); }
+.progress { height: 8px; background: var(--surface-2); border-radius: 999px; overflow: hidden; margin: 8px 0 4px; }
+.progress > div { height: 100%; background: var(--ok); width: 0; transition: width .25s; }
+
+/* timeline */
+.days { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 16px 0 8px; }
+.day { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; font-size: 13.5px; }
+.day b { display: block; color: var(--brand); font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
+.day .gate { display: inline-block; margin-top: 8px; font-size: 12px; font-weight: 600; color: var(--warn); }
+details.step { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 10px; box-shadow: var(--shadow); }
+details.step > summary { list-style: none; cursor: pointer; padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
+details.step > summary::-webkit-details-marker { display: none; }
+.num { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--brand); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 14px; }
+:root[data-theme="dark"] .num { color: #0b1220; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .num { color: #0b1220; } }
+details.step summary .title { flex: 1; font-weight: 600; }
+details.step summary .sub { display: block; font-weight: 400; font-size: 13px; color: var(--muted); }
+details.step summary::after { content: "▸"; color: var(--muted); transition: transform .2s; }
+details.step[open] summary::after { transform: rotate(90deg); }
+details.step .body { padding: 0 16px 14px 58px; font-size: 14.5px; }
+.kv { display: grid; grid-template-columns: 110px 1fr; gap: 4px 12px; margin-bottom: 10px; }
+.kv dt { color: var(--muted); font-size: 13px; }
+.kv dd { margin: 0; }
+.gate-bar { display: flex; align-items: center; gap: 10px; padding: 10px 14px; margin: 4px 0 14px; border-radius: 10px; background: var(--warn-soft); color: var(--warn); font-weight: 600; font-size: 14px; border: 1px dashed color-mix(in srgb, var(--warn) 45%, transparent); }
+.gate-bar span { font-weight: 400; color: var(--text); }
+
+/* rules */
+.rules { counter-reset: r; list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.rules li { counter-increment: r; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px 14px 52px; position: relative; font-size: 14.5px; margin: 0; }
+.rules li::before { content: counter(r); position: absolute; left: 14px; top: 14px; width: 26px; height: 26px; border-radius: 8px; background: var(--bad-soft); color: var(--bad); font-weight: 700; display: grid; place-items: center; font-size: 13px; }
+.rules li b { display: block; }
+.rules li span { color: var(--muted); font-size: 13.5px; }
+
+/* code blocks */
+.code { position: relative; margin: 12px 0 16px; }
+.code pre { margin: 0; background: var(--code-bg); color: var(--code-text); border-radius: 10px; padding: 16px; overflow: auto; font: 13px/1.6 var(--mono); max-height: 420px; white-space: pre-wrap; word-break: break-word; }
+.code .copy { position: absolute; top: 8px; right: 8px; font: 12px var(--font); border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.08); color: #fff; border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+.code .copy:hover { background: rgba(255,255,255,.18); }
+.code .label { font-size: 12px; color: var(--muted); margin-bottom: 6px; font-weight: 600; }
+
+/* tables */
+.table-wrap { overflow-x: auto; margin: 12px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { background: var(--surface-2); font-weight: 600; font-size: 13px; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+
+/* calculator */
+.calc { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.calc-form { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; display: grid; grid-template-columns: 1fr 150px; gap: 10px 12px; align-items: center; font-size: 14px; }
+.calc-form input[type=number], .calc-form select { width: 100%; font: inherit; padding: 6px 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); }
+.calc-form .full { grid-column: 1 / -1; }
+.calc-out { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; }
+.calc-out table td:last-child, .calc-out table th:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+.total { display: flex; align-items: baseline; justify-content: space-between; margin-top: 12px; font-size: 1.1rem; font-weight: 700; }
+.total .v { font-size: 1.7rem; color: var(--brand); }
+.meter { height: 10px; border-radius: 999px; background: var(--surface-2); position: relative; margin: 10px 0 6px; overflow: hidden; }
+.meter > div { height: 100%; width: 0; border-radius: 999px; transition: width .25s, background .25s; }
+.meter-legend { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+#calcStatus { margin-top: 10px; }
+
+/* flow */
+.flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; margin: 14px 0; }
+.flow .box { flex: 1 1 160px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; font-size: 13.5px; }
+.flow .box b { display: block; font-size: 13px; }
+.flow .arrow { align-self: center; color: var(--muted); font-size: 18px; }
+.flow .box.stop { border-color: color-mix(in srgb, var(--bad) 40%, transparent); background: var(--bad-soft); }
+
+/* faq */
+details.faq { border-bottom: 1px solid var(--border); padding: 12px 0; }
+details.faq summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; gap: 10px; }
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq summary::before { content: "+"; color: var(--accent); font-weight: 700; width: 14px; flex: none; }
+details.faq[open] summary::before { content: "–"; }
+details.faq > div { padding: 8px 0 0 24px; font-size: 14.5px; }
+
+.tree { font-family: var(--mono); font-size: 13px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; white-space: pre; overflow-x: auto; line-height: 1.55; }
+footer { color: var(--muted); font-size: 13px; padding: 24px 0 8px; }
+
+/* responsive */
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; padding: 0 16px; gap: 0; }
+  #navToggle { display: inline-flex; }
+  nav.toc { position: fixed; top: 56px; left: 0; right: 0; max-height: calc(100vh - 56px); background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 12px 16px 16px; display: none; z-index: 19; box-shadow: var(--shadow); }
+  nav.toc.open { display: block; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .days { grid-template-columns: 1fr; }
+  .rules, .two-col, .calc { grid-template-columns: 1fr; }
+  .flow { flex-direction: column; }
+  .flow .box { flex: none; }
+  .flow .arrow { transform: rotate(90deg); line-height: 1; }
+  .hero { padding: 26px 20px; }
+  .hero h1 { font-size: 1.55rem; }
+  details.step .body { padding-left: 16px; }
+  .kv { grid-template-columns: 1fr; }
+  .kv dt { margin-top: 6px; }
+  .topbar .logo .long { display: none; }
+}
+@media print {
+  .topbar, nav.toc, .copy { display: none !important; }
+  .layout { display: block; }
+  details { display: block; }
+  details > *:not(summary) { display: block !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <button class="icon-btn" id="navToggle" aria-label="Mở mục lục" aria-expanded="false">☰ Mục lục</button>
+  <div class="logo">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+    <span>Ad Kit <span class="long">· Hướng dẫn sử dụng</span></span>
+  </div>
+  <div class="spacer"></div>
+  <button class="icon-btn" id="themeToggle" aria-label="Đổi giao diện sáng/tối">◐ <span id="themeLabel">Giao diện</span></button>
+</header>
+
+<div class="layout">
+  <nav class="toc" id="toc" aria-label="Mục lục">
+    <div class="toc-label">Mục lục</div>
+    <a href="#tong-quan">Tổng quan</a>
+    <a href="#bat-dau">Bắt đầu theo vai trò</a>
+    <a href="#thiet-lap">Thiết lập lần đầu</a>
+    <a href="#quy-trinh">Quy trình 9 bước</a>
+    <a href="#nguyen-tac">8 nguyên tắc cứng</a>
+    <a href="#templates">Dùng từng template</a>
+    <a href="#chi-phi">Chi phí &amp; giới hạn thử lại</a>
+    <a href="#file">Thư mục &amp; đặt tên file</a>
+    <a href="#tinh-huong">Xử lý tình huống</a>
+    <a href="#bao-tri">Bảo trì kit</a>
+  </nav>
+
+  <main>
+    <!-- ============ TỔNG QUAN ============ -->
+    <section id="tong-quan" style="padding-top:0">
+      <div class="hero">
+        <svg class="plane" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+        <h1>Kit sản xuất video quảng cáo hàng không bằng AI của Google</h1>
+        <p>Trang này hướng dẫn cách dùng bộ kit: đọc gì trước, thiết lập những gì, dùng template nào ở bước nào, và xử lý khi có sự cố. Quy định chi tiết nằm trong <a href="SOP.md" style="color:#fff;text-decoration:underline">SOP.md</a>.</p>
+        <div class="meta">
+          <span class="chip">SOP v1.0 · 12/11/2026</span>
+          <span class="chip">Gemini · Nano Banana · Veo 3.1 · Lyria · Gemini TTS</span>
+          <span class="chip">Hậu kỳ: Premiere + After Effects</span>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>5 ngày</b><span>cho một bộ chiến dịch</span></div>
+        <div class="stat"><b>≤ $500</b><span>chi phí AI mỗi bộ</span></div>
+        <div class="stat"><b>6 file</b><span>M30 · C15 · C06 × VI/EN</span></div>
+        <div class="stat"><b>3 cổng</b><span>duyệt: kịch bản · animatic · bản cuối</span></div>
+      </div>
+
+      <h3>Bộ kit gồm những gì</h3>
+      <div class="grid">
+        <div class="card"><h4>📘 SOP</h4><p>Quy trình 9 bước, vai trò, lịch, chi phí, pháp lý, danh mục model.</p><a class="file-link" href="SOP.md">SOP.md</a></div>
+        <div class="card"><h4>📝 Brief</h4><p>Mẫu brief chiến dịch, có ký xác nhận của Brand Approver.</p><a class="file-link" href="templates/01-brief.md">templates/01-brief.md</a></div>
+        <div class="card"><h4>🎨 Brand Kit / Gem</h4><p>Thông tin thương hiệu + Instructions dán vào Gem viết kịch bản.</p><a class="file-link" href="templates/02-brand-kit-gem.md">templates/02-brand-kit-gem.md</a></div>
+        <div class="card"><h4>✍️ Cấu trúc prompt</h4><p>Prompt chuẩn cho ảnh, video Veo, nhạc Lyria, giọng đọc TTS.</p><a class="file-link" href="templates/03-prompt-structure.md">templates/03-prompt-structure.md</a></div>
+        <div class="card"><h4>📊 Workbook chiến dịch</h4><p>Shot list, Shot log tự tính chi phí, QC, Ngân sách, Giá model.</p><a class="file-link" href="templates/campaign-workbook.xlsx">templates/campaign-workbook.xlsx</a></div>
+        <div class="card"><h4>✅ Checklist QC</h4><p>47 mục: hàng không, an toàn bay, lỗi AI, thương hiệu, pháp lý, kỹ thuật.</p><a class="file-link" href="templates/06-qc-checklist.md">templates/06-qc-checklist.md</a></div>
+        <div class="card"><h4>🧪 Kế hoạch pilot</h4><p>Chuẩn bị một lần + chạy thử trên bộ social 15s trước khi áp dụng.</p><a class="file-link" href="pilot-plan.md">pilot-plan.md</a></div>
+        <div class="card"><h4>⚙️ Script workbook</h4><p>Sinh lại workbook khi đổi giá model hoặc checklist QC.</p><a class="file-link" href="../scripts/build_workbook.py">scripts/build_workbook.py</a></div>
+      </div>
+    </section>
+
+    <!-- ============ VAI TRÒ ============ -->
+    <section id="bat-dau">
+      <h2>Bắt đầu theo vai trò</h2>
+      <p class="lead">Chọn vai trò của bạn để biết cần đọc gì và chịu trách nhiệm gì. Một người có thể kiêm nhiều vai, <b>trừ QC Reviewer</b>.</p>
+      <div class="tabs" role="tablist" id="roleTabs">
+        <button class="tab" role="tab" aria-selected="true" data-role="p">Producer</button>
+        <button class="tab" role="tab" aria-selected="false" data-role="cw">Copywriter</button>
+        <button class="tab" role="tab" aria-selected="false" data-role="ai">AI Artist</button>
+        <button class="tab" role="tab" aria-selected="false" data-role="ed">Editor</button>
+        <button class="tab" role="tab" aria-selected="false" data-role="qc">QC Reviewer</button>
+        <button class="tab" role="tab" aria-selected="false" data-role="br">Brand &amp; Legal</button>
+      </div>
+
+      <div class="tabpanel" role="tabpanel" data-panel="p">
+        <div class="two-col">
+          <div><h4>Bạn chịu trách nhiệm</h4><ul>
+            <li>Điều phối lịch 5 ngày và 3 cổng duyệt</li>
+            <li>Brief, Shot log, ngân sách, đóng gói file giao</li>
+            <li>Thiết lập lần đầu (Ngày 0) và tạo Gem Brand Kit</li>
+            <li>Rà soát Model Registry <b>hằng tháng</b></li>
+          </ul></div>
+          <div><h4>Đọc trước</h4><ul>
+            <li><a href="SOP.md">SOP.md</a> — toàn bộ</li>
+            <li><a href="pilot-plan.md">pilot-plan.md</a></li>
+            <li><a href="templates/01-brief.md">01-brief.md</a>, <a href="templates/02-brand-kit-gem.md">02-brand-kit-gem.md</a></li>
+            <li>Mục <a href="#chi-phi">Chi phí</a> trên trang này</li>
+          </ul></div>
+        </div>
+      </div>
+      <div class="tabpanel" role="tabpanel" data-panel="cw" hidden>
+        <div class="two-col">
+          <div><h4>Bạn chịu trách nhiệm</h4><ul>
+            <li>Bước 2: chọn ý tưởng cùng Producer, viết kịch bản + shot list bằng Gem</li>
+            <li>Chỉnh tay lời VO tiếng Việt cho tự nhiên (VO tối đa ~24s trong 30s)</li>
+            <li>Bước 8: chuyển thể bản tiếng Anh — <b>không dịch máy nguyên văn</b></li>
+          </ul></div>
+          <div><h4>Đọc trước</h4><ul>
+            <li><a href="templates/02-brand-kit-gem.md">02-brand-kit-gem.md</a></li>
+            <li>SOP mục 3 (nguyên tắc), mục 6 bước 2 và 8</li>
+            <li><a href="#tpl-gem">Cách dùng Gem</a> trên trang này</li>
+          </ul></div>
+        </div>
+      </div>
+      <div class="tabpanel" role="tabpanel" data-panel="ai" hidden>
+        <div class="two-col">
+          <div><h4>Bạn chịu trách nhiệm</h4><ul>
+            <li>Storyboard, Production Bible, khung đầu</li>
+            <li>Tạo shot video bằng Veo theo giới hạn <b>3 Fast + 3 Standard</b></li>
+            <li>Nhạc Lyria, giọng đọc TTS</li>
+            <li>Ghi <b>mọi</b> lần tạo vào Shot log, kể cả lần hỏng</li>
+          </ul></div>
+          <div><h4>Đọc trước</h4><ul>
+            <li><a href="templates/03-prompt-structure.md">03-prompt-structure.md</a></li>
+            <li>SOP mục 6 bước 3–6, mục 8.2</li>
+            <li><a href="#tpl-prompt">Prompt mẫu</a> trên trang này</li>
+          </ul></div>
+        </div>
+      </div>
+      <div class="tabpanel" role="tabpanel" data-panel="ed" hidden>
+        <div class="two-col">
+          <div><h4>Bạn chịu trách nhiệm</h4><ul>
+            <li>Animatic (bước 4b), dựng, màu, mix (bước 7)</li>
+            <li>Dựng và giữ template MOGRT: end card + nhãn AI, khung giá, phụ đề</li>
+            <li>Làm 6 phiên bản và xuất đúng thông số (bước 8)</li>
+          </ul></div>
+          <div><h4>Đọc trước</h4><ul>
+            <li>SOP mục 2 (thông số giao file), mục 6 bước 4b, 7, 8</li>
+            <li><a href="templates/06-qc-checklist.md">06-qc-checklist.md</a> phần D–F</li>
+          </ul></div>
+        </div>
+      </div>
+      <div class="tabpanel" role="tabpanel" data-panel="qc" hidden>
+        <div class="two-col">
+          <div><h4>Bạn chịu trách nhiệm</h4><ul>
+            <li>Kiểm từng shot (phần A–C) trước khi vào <code>selects/</code></li>
+            <li>Kiểm bản dựng và 6 file giao (phần A–F) trong sheet QC</li>
+            <li><b>Không bao giờ</b> kiểm shot do chính mình tạo</li>
+          </ul></div>
+          <div><h4>Đọc trước</h4><ul>
+            <li><a href="templates/06-qc-checklist.md">06-qc-checklist.md</a></li>
+            <li>Mục <a href="#tpl-qc">Checklist QC</a> trên trang này</li>
+          </ul></div>
+        </div>
+      </div>
+      <div class="tabpanel" role="tabpanel" data-panel="br" hidden>
+        <div class="two-col">
+          <div><h4>Bạn chịu trách nhiệm</h4><ul>
+            <li><b>Brand:</b> ký brief, duyệt 3 cổng (tối đa 1 vòng sửa/cổng/ngày)</li>
+            <li><b>Legal:</b> xem điều kiện giá ngay từ brief; duyệt cổng 3 (giá, claim, nhãn AI, quyền tư liệu)</li>
+            <li><b>Legal:</b> xử lý mục cần xác minh V2–V5</li>
+          </ul></div>
+          <div><h4>Đọc trước</h4><ul>
+            <li>SOP mục 3, 6 (các cổng duyệt), 10, 12</li>
+            <li><a href="templates/01-brief.md">01-brief.md</a></li>
+          </ul></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ THIẾT LẬP ============ -->
+    <section id="thiet-lap">
+      <h2>Thiết lập lần đầu</h2>
+      <p class="lead">Làm <b>một lần</b>, dùng cho mọi chiến dịch sau. Tiến độ được lưu trong trình duyệt của bạn.</p>
+      <div class="progress"><div id="setupBar"></div></div>
+      <div style="font-size:13px;color:var(--muted)" id="setupCount">0/10 việc</div>
+      <ul class="checklist" id="setupList">
+        <li><input type="checkbox" id="s1"><label for="s1">Tạo project GCP, bật <b>Gemini Enterprise Agent Platform</b> (Vertex AI cũ), <b>bật thanh toán</b> — điều kiện để được Google bồi hoàn bản quyền. Kiểm tra hạn mức Veo. <span class="blocker">CHẶN</span></label><span class="who">Producer</span></li>
+        <li><input type="checkbox" id="s2"><label for="s2">Tạo Shared Drive theo cấu trúc thư mục chuẩn; tải <code>campaign-workbook.xlsx</code> lên, mở bằng Google Sheets làm mẫu. <span class="blocker">CHẶN</span></label><span class="who">Producer</span></li>
+        <li><input type="checkbox" id="s3"><label for="s3">Điền Brand Kit, tạo Gem, tải Knowledge (guideline, đội tàu bay, kịch bản cũ, file cấu trúc prompt). <span class="blocker">CHẶN</span></label><span class="who">Producer + CW</span></li>
+        <li><input type="checkbox" id="s4"><label for="s4">Thu thập ảnh/footage thật đúng dòng máy bay; xác nhận quyền sử dụng và model release (V5). <span class="blocker">CHẶN</span></label><span class="who">Producer + Brand</span></li>
+        <li><input type="checkbox" id="s5"><label for="s5">Dựng template MOGRT: end card (logo + CTA + <b>nhãn AI</b>), phụ đề VI/EN, lower third, khung 9:16 có vạch vùng an toàn. <span class="blocker">CHẶN</span></label><span class="who">Editor</span></li>
+        <li><input type="checkbox" id="s6"><label for="s6">Chọn 1 giọng TTS tiếng Việt + 1 giọng tiếng Anh cho thương hiệu, ghi vào Brand Kit.</label><span class="who">AI Artist + Brand</span></li>
+        <li><input type="checkbox" id="s7"><label for="s7">Gửi câu hỏi bồi hoàn (Omni, Nano Banana, Lyria) cho Google account rep (V1).</label><span class="who">Producer</span></li>
+        <li><input type="checkbox" id="s8"><label for="s8">Legal chốt hình thức nhãn AI theo Nghị định 142/2026 (V3) → chốt mẫu end card. <span class="blocker">CHẶN</span></label><span class="who">Legal</span></li>
+        <li><input type="checkbox" id="s9"><label for="s9">Chạy thử nhanh: Veo Fast 4K (V6), Flow 9:16 (V7), dấu tiếng Việt của Nano Banana (V8).</label><span class="who">AI Artist</span></li>
+        <li><input type="checkbox" id="s10"><label for="s10">Phân vai: ai là Producer, CW, AI Artist, Editor, QC, Brand, Legal. <span class="blocker">CHẶN</span></label><span class="who">Producer</span></li>
+      </ul>
+      <div class="callout info"><strong>Sau thiết lập: chạy pilot trước</strong>Đừng áp dụng ngay cho chiến dịch TVC. Chạy bộ social 15s theo <a href="pilot-plan.md">pilot-plan.md</a>, họp rút kinh nghiệm, cập nhật SOP lên v1.1.</div>
+    </section>
+
+    <!-- ============ QUY TRÌNH ============ -->
+    <section id="quy-trinh">
+      <h2>Quy trình 9 bước</h2>
+      <p class="lead">Lịch chuẩn 5 ngày. Mỗi cổng duyệt được tối đa 1 vòng sửa trong ngày; quá thì lịch lùi theo.</p>
+      <div class="days">
+        <div class="day"><b>Ngày 1</b>Brief → Ý tưởng → Kịch bản + Shot list → Storyboard<br><span class="gate">🚦 Cổng 1</span></div>
+        <div class="day"><b>Ngày 2</b>Production Bible → Animatic + VO nháp<br><span class="gate">🚦 Cổng 2</span></div>
+        <div class="day"><b>Ngày 3</b>Tạo shot (Fast → Standard) + QC từng shot · Nhạc</div>
+        <div class="day"><b>Ngày 4</b>Hero shot 9:16 → Dựng master → Màu → Đồ hoạ → Mix</div>
+        <div class="day"><b>Ngày 5</b>Bản 15s/6s, bản EN → QC toàn bộ → Giao<br><span class="gate">🚦 Cổng 3</span></div>
+      </div>
+      <p style="font-size:13px;color:var(--muted)">Bấm vào từng bước để xem chi tiết.</p>
+
+      <details class="step"><summary><span class="num">1</span><span class="title">Brief<span class="sub">Producer + Brand Approver</span></span></summary>
+        <div class="body"><dl class="kv"><dt>Template</dt><dd><a href="templates/01-brief.md">01-brief.md</a></dd><dt>Đầu ra</dt><dd>Brief có chữ ký Brand Approver</dd><dt>Lưu ý</dt><dd>Có giá/khuyến mãi → gửi Legal xem điều kiện <b>ngay bây giờ</b>, đừng đợi cổng 3. Ghi rõ <b>dòng máy bay</b> khai thác đường bay.</dd></dl></div>
+      </details>
+      <details class="step"><summary><span class="num">2</span><span class="title">Ý tưởng &amp; kịch bản<span class="sub">Copywriter · Gem Brand Kit</span></span></summary>
+        <div class="body"><dl class="kv"><dt>Công cụ</dt><dd>Gem Brand Kit (Gemini)</dd><dt>Đầu ra</dt><dd>Kịch bản 30s + sheet <code>Shot list</code></dd><dt>Cách làm</dt><dd>Brief → Gem đề xuất 3–5 hướng → chọn 1 → Gem viết kịch bản + shot list → CW chỉnh VO. Đánh dấu 3–5 hero shot; các shot khác bố cục center-safe.</dd></dl></div>
+      </details>
+      <details class="step"><summary><span class="num">3</span><span class="title">Storyboard<span class="sub">AI Artist · Nano Banana 2.1</span></span></summary>
+        <div class="body"><dl class="kv"><dt>Đầu ra</dt><dd>Storyboard PDF: 1 khung/shot, kèm lời VO</dd><dt>Lưu ý</dt><dd>Dùng model rẻ, nhanh — đây là bản nháp để duyệt ý, chưa cần đẹp.</dd></dl></div>
+      </details>
+      <div class="gate-bar">🚦 Cổng 1 — Kịch bản + Storyboard <span>· Brand Approver</span></div>
+      <details class="step"><summary><span class="num">4</span><span class="title">Production Bible + Animatic<span class="sub">AI Artist + Editor · Nano Banana Pro, Gemini TTS</span></span></summary>
+        <div class="body"><dl class="kv"><dt>Bible</dt><dd>Ảnh thật tàu bay/cabin · character sheet 2–4 hành khách AI · ảnh điểm đến · 3–5 style frame · khung đầu từng shot (hero shot: cả 16:9 và 9:16). Lưu ở <code>02_bible/</code>.</dd><dt>Animatic</dt><dd>Khung đầu + VO nháp TTS + nhạc nháp, đúng thời lượng. Mục đích: bắt lỗi nhịp <b>trước khi</b> tốn tiền render.</dd></dl></div>
+      </details>
+      <div class="gate-bar">🚦 Cổng 2 — Animatic <span>· Brand + quản lý marketing · sau cổng này khoá shot list</span></div>
+      <details class="step"><summary><span class="num">5</span><span class="title">Tạo shot video<span class="sub">AI Artist · Veo 3.1 Fast → Standard</span></span></summary>
+        <div class="body"><dl class="kv"><dt>Cách làm</dt><dd>Luôn image-to-video từ khung đầu. Prompt tiếng Anh theo cấu trúc chuẩn. <b>Tắt âm thanh Veo</b> mặc định (rẻ hơn ~50%). Theo giới hạn 3+3 lần.</dd><dt>Ghi chép</dt><dd>Mọi lần tạo → 1 dòng Shot log</dd><dt>QC</dt><dd>Shot chọn → QC phần A–C → đạt mới vào <code>04_shots/selects/</code></dd></dl></div>
+      </details>
+      <details class="step"><summary><span class="num">6</span><span class="title">Âm thanh<span class="sub">AI Artist + Editor · Lyria, Gemini TTS</span></span></summary>
+        <div class="body"><dl class="kv"><dt>Nhạc</dt><dd>Lyria, <b>chỉ nhạc không lời</b>, tạo 3–5 phương án</dd><dt>Giọng đọc</dt><dd>Gemini TTS cho 15s/6s; master 30s có thể dùng giọng người thật</dd><dt>Sonic logo</dt><dd>File thật của hãng, luôn ở cuối</dd></dl></div>
+      </details>
+      <details class="step"><summary><span class="num">7</span><span class="title">Hậu kỳ<span class="sub">Editor · Premiere + After Effects</span></span></summary>
+        <div class="body"><dl class="kv"><dt>Cách làm</dt><dd>Dựng theo animatic → màu theo style frame → đồ hoạ từ MOGRT (logo, giá, CTA, phụ đề, end card có nhãn AI) → mix</dd><dt>QC</dt><dd>Phần D–F trên bản dựng</dd></dl></div>
+      </details>
+      <details class="step"><summary><span class="num">8</span><span class="title">Phiên bản<span class="sub">Editor + Copywriter</span></span></summary>
+        <div class="body"><dl class="kv"><dt>9:16</dt><dd>Hero shot 9:16 + crop shot center-safe; kiểm vùng an toàn</dd><dt>Tiếng Anh</dt><dd>Giữ nguyên hình; thay VO, phụ đề, chữ trên màn hình</dd><dt>Đầu ra</dt><dd>6 file: M30, C15, C06 × VI/EN</dd></dl></div>
+      </details>
+      <details class="step"><summary><span class="num">9</span><span class="title">QC &amp; giao file<span class="sub">QC Reviewer + Producer</span></span></summary>
+        <div class="body"><dl class="kv"><dt>Cách làm</dt><dd>QC toàn bộ checklist trên cả 6 file (sheet <code>QC</code>) → Producer đóng gói <code>07_deliverables/</code> + Shot log + báo cáo chi phí</dd></dl></div>
+      </details>
+      <div class="gate-bar">🚦 Cổng 3 — Bản cuối <span>· Brand <b>và</b> Legal, bắt buộc cả hai</span></div>
+    </section>
+
+    <!-- ============ NGUYÊN TẮC ============ -->
+    <section id="nguyen-tac">
+      <h2>8 nguyên tắc cứng</h2>
+      <p class="lead">Không có ngoại lệ. Khi phân vân, quay lại đây.</p>
+      <ol class="rules">
+        <li><b>Livery, logo, dòng máy bay là tài sản thật</b><span>AI không vẽ logo/livery. Dùng footage thật hoặc ảnh thật làm khung đầu; logo chèn ở hậu kỳ.</span></li>
+        <li><b>AI không vẽ chữ vào hình</b><span>Mọi chữ nằm ở lớp đồ hoạ — đổi sang bản EN chỉ cần thay chữ.</span></li>
+        <li><b>Không có tiếp viên AI cận cảnh</b><span>Hành khách AI được phép; tiếp viên chỉ góc xa/từ sau, hoặc footage thật.</span></li>
+        <li><b>Flow chỉ để thăm dò</b><span>Flow gắn watermark với người dùng tại VN và không được bồi hoàn. Bản cuối render qua Agent Platform.</span></li>
+        <li><b>Bản master chỉ dùng model có bồi hoàn</b><span>Hiện là Veo 3.1 Standard (GA). Omni chỉ dùng nháp.</span></li>
+        <li><b>Nhãn AI trên mọi phiên bản</b><span>End card + bật khai báo AI trên YouTube/Google Ads, Meta, TikTok. Không xoá SynthID/C2PA.</span></li>
+        <li><b>Không có trong Shot log = không vào timeline</b><span>Mọi lần gọi model là một dòng, kể cả lần hỏng.</span></li>
+        <li><b>Mọi shot qua QC trước khi dựng</b><span>Người kiểm không phải người tạo shot đó.</span></li>
+      </ol>
+    </section>
+
+    <!-- ============ TEMPLATES ============ -->
+    <section id="templates">
+      <h2>Dùng từng template</h2>
+
+      <h3 id="tpl-brief">📝 Brief — <a class="file-link" href="templates/01-brief.md">01-brief.md</a></h3>
+      <ol>
+        <li>Copy nội dung sang Google Docs trong <code>00_brief/</code> của chiến dịch.</li>
+        <li>Producer điền cùng Brand Approver; mọi ô ⚠️ là bắt buộc.</li>
+        <li>Đặt <b>mã chiến dịch</b> (VD <code>DAD25</code>) — dùng trong mọi tên file.</li>
+        <li>Brief chưa có chữ ký Brand Approver → chưa bắt đầu bước 2.</li>
+      </ol>
+
+      <h3 id="tpl-gem">🎨 Brand Kit &amp; Gem — <a class="file-link" href="templates/02-brand-kit-gem.md">02-brand-kit-gem.md</a></h3>
+      <ol>
+        <li>Điền bảng "Thông tin cần điền trước" trong file.</li>
+        <li>Gemini → <b>Gems</b> → <b>New Gem</b>, đặt tên <code>Brand Kit [HÃNG] — Ad Video</code>.</li>
+        <li>Bấm <b>Sao chép</b> bên dưới, dán vào ô Instructions, thay hết các chỗ <code>[ĐIỀN]</code>.</li>
+        <li>Knowledge: tải brand guideline, danh sách đội tàu bay &amp; đường bay, 3–5 kịch bản cũ, file <code>03-prompt-structure.md</code>.</li>
+        <li>Chia sẻ cho team; chỉ Producer được sửa.</li>
+      </ol>
+      <div class="code"><div class="label">Instructions cho Gem</div><button class="copy" data-copy="gemText">Sao chép</button><pre id="gemText">Bạn là creative director kiêm copywriter cho video quảng cáo của hãng hàng không [HÃNG].
+
+## Thương hiệu
+- Brand essence: [ĐIỀN]
+- Tính cách: [ĐIỀN]
+- Tone giọng: [ĐIỀN]
+- Xưng hô: tiếng Việt "[ĐIỀN]", tiếng Anh "[ĐIỀN]"
+- Slogan: VI "[ĐIỀN]" / EN "[ĐIỀN]"
+- Bắt buộc dùng: [ĐIỀN]
+- Cấm dùng: [ĐIỀN]
+
+## Sự thật về sản phẩm (không được bịa)
+- Chỉ nhắc tới dòng máy bay, đường bay, hạng ghế, dịch vụ có trong tài liệu Knowledge.
+- Không tự đặt ra giá, khuyến mãi, số liệu, giải thưởng. Nếu brief không có, để [CẦN XÁC NHẬN].
+- Mọi claim so sánh hoặc tuyệt đối ("nhất", "duy nhất", "100%") phải đánh dấu [CẦN CĂN CỨ].
+- Giá luôn theo quy tắc: [ĐIỀN].
+
+## Ràng buộc sản xuất (video sẽ làm bằng AI)
+- Tàu bay, logo, livery: luôn ghi nguồn là THẬT hoặc HYBRID (ảnh thật làm khung đầu). Không mô tả logo trong cảnh AI.
+- Tiếp viên: chỉ góc xa hoặc từ phía sau nếu là AI; cận cảnh thì ghi nguồn THẬT.
+- Không có chữ trong hình do AI tạo. Mọi chữ trên màn hình đưa vào cột "Chữ trên màn hình" (lớp đồ hoạ).
+- Mỗi shot tối đa 8 giây, một hành động chính, chuyển động máy quay đơn giản.
+- Không thể hiện hành vi trái quy định an toàn bay (không thắt dây khi cất/hạ cánh, hành lý ở lối đi, đứng khi đèn thắt dây sáng…).
+- Nhân vật hành khách không được giống người nổi tiếng.
+- Đánh dấu 3–5 hero shot; các shot khác bố cục center-safe để crop sang 9:16.
+
+## Nhiệm vụ 1 — Ý tưởng
+Khi nhận brief, đề xuất 3–5 hướng ý tưởng. Mỗi hướng gồm:
+1. Tên ý tưởng
+2. Insight khách hàng (1 câu)
+3. Tóm tắt (3 câu)
+4. Cảnh chủ đạo
+5. Rủi ro khi sản xuất bằng AI (cao/trung bình/thấp + lý do)
+
+## Nhiệm vụ 2 — Kịch bản + shot list
+Khi được chọn một hướng, viết:
+- Kịch bản 30s: lời VO tiếng Việt tự nhiên, VO tối đa ~24 giây.
+- Shot list dạng bảng với các cột:
+  shot_id | thời lượng (s) | mô tả hình | góc máy &amp; chuyển động | nguồn (AI/THẬT/HYBRID) | hero (Y/N) | lời VO | chữ trên màn hình | SFX | ghi chú
+- Tổng thời lượng các shot = 30s (gồm end card 3–4s).
+- Gợi ý cách cắt 15s và 6s từ cùng bộ shot.
+
+## Nhiệm vụ 3 — Prompt hình ảnh/video
+Khi được yêu cầu, viết prompt TIẾNG ANH theo cấu trúc chuẩn của team (xem tài liệu "Prompt structure" trong Knowledge).
+
+## Nhiệm vụ 4 — Bản tiếng Anh
+Chuyển thể (không dịch nguyên văn) lời VO và chữ trên màn hình sang tiếng Anh, giữ đúng thời lượng và tone [HÃNG].
+
+## Định dạng trả lời
+- Tiếng Việt, trừ prompt (tiếng Anh) và bản EN.
+- Bảng dùng Markdown để dán được vào Google Sheets.</pre></div>
+      <div class="callout info"><strong>Mẹo dùng Gem</strong>Dán toàn bộ brief vào tin nhắn đầu. Khi Gem trả shot list dạng bảng, copy dán thẳng vào sheet <code>Shot list</code> rồi chỉnh tên cột cho khớp.</div>
+
+      <h3 id="tpl-prompt">✍️ Cấu trúc prompt — <a class="file-link" href="templates/03-prompt-structure.md">03-prompt-structure.md</a></h3>
+      <p>Prompt cho ảnh, video, nhạc viết bằng <b>tiếng Anh</b>. Gọi nhân vật bằng mã Bible (<code>CH01</code>) và luôn đính kèm ảnh tham chiếu. Prompt dùng xong dán nguyên văn vào Shot log. Ba mẫu dùng nhiều nhất:</p>
+      <div class="code"><div class="label">Video — Veo 3.1 (image-to-video)</div><button class="copy" data-copy="pVeo">Sao chép</button><pre id="pVeo">[CAMERA] {movement: slow dolly in / static / gentle pan left / crane up}, {lens feel}, {speed: slow, smooth}.
+[SUBJECT] {CH01} {single main action, described physically: "turns her head toward the window and smiles softly"}.
+[SETTING] {where — must match first frame}.
+[LIGHT] {must match first frame}, {any change: "sunlight sweeps across her face"}.
+[MOTION DETAILS] {secondary motion: clouds drift, hair moves slightly}.
+[STYLE] Cinematic commercial, photorealistic, {grade}, 24fps natural motion blur.
+[AUDIO] none</pre></div>
+      <div class="code"><div class="label">Negative prompt (trường negativePrompt — liệt kê, không viết "no …")</div><button class="copy" data-copy="pNeg">Sao chép</button><pre id="pNeg">text, letters, logos, watermark, signage, distorted hands, extra fingers, warped face, morphing, flickering, sudden camera cuts, unbuckled seatbelt during takeoff, luggage in aisle</pre></div>
+      <div class="code"><div class="label">Ảnh — Character sheet (Nano Banana Pro)</div><button class="copy" data-copy="pChar">Sao chép</button><pre id="pChar">[CHARACTER] Character reference sheet of {age} {gender} {ethnicity/look}, {build}, {hair}, {distinguishing features}.
+[WARDROBE] Wearing {outfit, colors, materials}.
+[LAYOUT] Same person shown in 5 views on a plain light-grey studio background: front, three-quarter left, profile left, three-quarter right, full body standing.
+[LIGHT] Soft even studio lighting, neutral color balance.
+[STYLE] Photorealistic, natural skin texture, 85mm lens look.
+[EXCLUDE] No text, no labels, no logos, no jewelry with letters. Does not resemble any real or famous person.</pre></div>
+      <p>Mẫu khung đầu, shot tàu bay HYBRID, nhạc Lyria và giọng đọc TTS: xem <a href="templates/03-prompt-structure.md">file đầy đủ</a>.</p>
+
+      <h3 id="tpl-workbook">📊 Workbook chiến dịch — <a class="file-link" href="templates/campaign-workbook.xlsx">campaign-workbook.xlsx</a></h3>
+      <ol>
+        <li>Tải lên thư mục chiến dịch trên Shared Drive → <b>Mở bằng Google Sheets</b> → <b>Tệp › Lưu dưới dạng Google Trang tính</b>.</li>
+        <li>Đổi tên thành <code>{CAMPAIGN}_workbook</code>.</li>
+        <li>Xoá các dòng <b>VÍ DỤ</b> (tô vàng) ở Shot list và Shot log.</li>
+      </ol>
+      <div class="table-wrap"><table>
+        <tr><th>Sheet</th><th>Dùng khi nào</th><th>Ai điền</th><th>Ghi chú</th></tr>
+        <tr><td>Ngân sách</td><td>Theo dõi hằng ngày</td><td>Tự động</td><td>Cộng từ Shot log; báo <span class="tag warn">Cảnh báo</span> ở $400, <span class="tag bad">Vượt trần</span> ở $500</td></tr>
+        <tr><td>Giá model</td><td>Rà soát hằng tháng</td><td>Producer</td><td>Đơn giá dùng để tính cột <code>cost_usd</code></td></tr>
+        <tr><td>Shot list</td><td>Bước 2, khoá sau cổng 2</td><td>CW, Producer</td><td>Dropdown cho nguồn, hero, tỉ lệ, trạng thái</td></tr>
+        <tr><td>Shot log</td><td>Mỗi lần gọi model</td><td>AI Artist, QC</td><td>Chọn <code>model_key</code> + nhập <code>qty</code> → tự điền model_id, độ phân giải, chi phí, nhóm</td></tr>
+        <tr><td>QC</td><td>Bước 9</td><td>QC Reviewer</td><td>Đạt / Lỗi / N/A cho 6 file; dòng cuối đếm số mục Lỗi</td></tr>
+      </table></div>
+      <div class="callout warn"><strong>Cột qty trong Shot log</strong>Video và TTS: số <b>giây</b>. Ảnh: số <b>ảnh</b>. Nhạc: số <b>bài</b>. Nhập sai đơn vị là sai ngân sách.</div>
+
+      <h3 id="tpl-qc">✅ Checklist QC — <a class="file-link" href="templates/06-qc-checklist.md">06-qc-checklist.md</a></h3>
+      <div class="table-wrap"><table>
+        <tr><th>Phần</th><th>Nội dung</th><th>Khi nào</th><th>Lỗi thì</th></tr>
+        <tr><td><b>A</b></td><td>Kỹ thuật hàng không: dòng máy bay, động cơ, cửa sổ, livery, cabin</td><td>Từng shot</td><td><span class="tag bad">Loại</span></td></tr>
+        <tr><td><b>B</b></td><td>An toàn bay &amp; hành vi: dây an toàn, lối đi, tiếp viên AI</td><td>Từng shot</td><td><span class="tag bad">Loại</span></td></tr>
+        <tr><td><b>C</b></td><td>Lỗi AI: tay, mặt trôi, chữ rác, vật lý, nhấp nháy</td><td>Từng shot</td><td><span class="tag warn">Producer quyết</span></td></tr>
+        <tr><td><b>D</b></td><td>Thương hiệu: logo, font, tone, sonic logo, end card</td><td>Bản dựng</td><td><span class="tag warn">Producer quyết</span></td></tr>
+        <tr><td><b>E</b></td><td>Pháp lý: giá, điều kiện, claim, nhãn AI, quyền tư liệu</td><td>Bản dựng</td><td><span class="tag bad">Loại</span></td></tr>
+        <tr><td><b>F</b></td><td>Kỹ thuật file: thông số, loudness, vùng an toàn, metadata</td><td>Bản dựng</td><td><span class="tag warn">Producer quyết</span></td></tr>
+      </table></div>
+      <p>Xem từng shot ở tốc độ thật, rồi <b>từng khung</b> ở đoạn có chuyển động mạnh (tay, mặt, cánh, bánh xe).</p>
+    </section>
+
+    <!-- ============ CHI PHÍ ============ -->
+    <section id="chi-phi">
+      <h2>Chi phí &amp; giới hạn thử lại</h2>
+      <h3 style="margin-top:.6em">Giới hạn số lần tạo mỗi shot</h3>
+      <div class="flow">
+        <div class="box"><b>Tối đa 3 lần</b>Veo 3.1 Fast — chốt bố cục &amp; chuyển động</div>
+        <div class="arrow">→</div>
+        <div class="box"><b>Tối đa 3 lần</b>Veo 3.1 Standard — cùng prompt &amp; khung đầu đã chốt</div>
+        <div class="arrow">→</div>
+        <div class="box stop"><b>Vẫn hỏng → DỪNG</b>(a) Thiết kế lại shot · (b) Đổi khung đầu/cuối · (c) Dùng footage thật</div>
+      </div>
+
+      <h3>Ước tính chi phí một bộ</h3>
+      <p style="font-size:14px;color:var(--muted)">Đơn giá theo tra cứu ngày 12/11/2026 trên Agent Platform (USD) — xác minh lại khi rà soát Model Registry.</p>
+      <div class="calc">
+        <form class="calc-form" id="calc" onsubmit="return false">
+          <label for="cShots">Số shot (bản master)</label><input type="number" id="cShots" value="10" min="0">
+          <label for="cDur">Thời lượng TB mỗi shot (giây)</label><select id="cDur"><option>4</option><option>6</option><option selected>8</option></select>
+          <label for="cFast">Số lần nháp Veo Fast / shot</label><input type="number" id="cFast" value="3" min="0" max="3">
+          <label for="cStd">Số lần Veo Standard / shot</label><input type="number" id="cStd" value="3" min="0" max="3">
+          <label for="cHero">Số hero shot làm thêm 9:16</label><input type="number" id="cHero" value="4" min="0">
+          <label for="cRes">Độ phân giải bản cuối</label><select id="cRes"><option value="1080" selected>1080p</option><option value="4k">4K</option></select>
+          <label for="cAudio">Veo tạo âm thanh</label><select id="cAudio"><option value="0" selected>Tắt (khuyến nghị)</option><option value="1">Bật</option></select>
+          <label for="cImgFast">Ảnh Nano Banana 2.1</label><input type="number" id="cImgFast" value="200" min="0">
+          <label for="cImgPro">Ảnh Nano Banana Pro</label><input type="number" id="cImgPro" value="100" min="0">
+        </form>
+        <div class="calc-out">
+          <div class="table-wrap" style="margin:0"><table id="calcTable">
+            <tr><th>Hạng mục</th><th>USD</th></tr>
+          </table></div>
+          <div class="total"><span>Tổng ước tính</span><span class="v" id="calcTotal">$0</span></div>
+          <div class="meter"><div id="calcMeter"></div></div>
+          <div class="meter-legend"><span>$0</span><span>Cảnh báo $400</span><span>Trần $500</span></div>
+          <div id="calcStatus" class="callout info" style="margin-bottom:0"></div>
+        </div>
+      </div>
+      <div class="callout info"><strong>Mẹo tiết kiệm</strong><ul>
+        <li>Tắt âm thanh Veo: rẻ hơn ~50%, âm thanh làm riêng ở bước 6.</li>
+        <li>Animatic kỹ ở ngày 2 rẻ hơn nhiều so với render lại ở ngày 4.</li>
+        <li>Dùng lại seed của bản nháp tốt nhất khi render bản Standard.</li>
+      </ul></div>
+    </section>
+
+    <!-- ============ FILE ============ -->
+    <section id="file">
+      <h2>Thư mục &amp; đặt tên file</h2>
+      <div class="two-col">
+        <div>
+          <h3 style="margin-top:.4em">Cấu trúc Shared Drive</h3>
+<div class="tree">[HÃNG] Ads/
+└── {YYYY}-{CAMPAIGN}/
+    ├── 00_brief/
+    ├── 01_script_storyboard/
+    ├── 02_bible/
+    │   ├── aircraft/  characters/
+    │   ├── locations/ style/
+    │   └── first_frames/
+    ├── 03_animatic/
+    ├── 04_shots/ drafts/ selects/
+    ├── 05_audio/ music/ vo/ sfx/
+    ├── 06_edit/ project/ exports/
+    ├── 07_deliverables/
+    └── {CAMPAIGN}_workbook</div>
+        </div>
+        <div>
+          <h3 style="margin-top:.4em">Quy ước tên</h3>
+          <div class="code"><pre>{CAMPAIGN}_{SHOT}_{RATIO}_{MODEL}_t{TAKE}.{ext}</pre></div>
+          <div class="table-wrap"><table>
+            <tr><th>Ví dụ</th><th>Là gì</th></tr>
+            <tr><td><code>DAD25_S03_169_veo31std_t02.mp4</code></td><td>Shot 3, 16:9, Veo Standard, lần 2</td></tr>
+            <tr><td><code>DAD25_S03_916_veo31fast_t01.mp4</code></td><td>Shot 3, 9:16, nháp Fast</td></tr>
+            <tr><td><code>DAD25_CH01_front_nbpro_v03.png</code></td><td>Character sheet</td></tr>
+            <tr><td><code>DAD25_S03_FF_169_nbpro_v02.png</code></td><td>Khung đầu shot 3</td></tr>
+            <tr><td><code>DAD25_C15_EN_916_v01.mp4</code></td><td>File giao 15s tiếng Anh</td></tr>
+          </table></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TÌNH HUỐNG ============ -->
+    <section id="tinh-huong">
+      <h2>Xử lý tình huống</h2>
+      <details class="faq"><summary>Veo làm méo tàu bay (sai động cơ, cửa sổ, livery)</summary><div>Giảm chuyển động: chuyển sang <b>locked-off</b>, tàu bay chỉ lăn/di chuyển chậm, thêm khối <code>[PRESERVE]</code>. Dùng ảnh thật làm cả khung đầu và khung cuối. Hết 3+3 lần vẫn méo → <b>dùng footage thật</b>, không thử tiếp.</div></details>
+      <details class="faq"><summary>Nhân vật "trôi" mặt giữa các shot</summary><div>Kiểm tra đã đính kèm đủ ảnh character sheet chưa và có gọi đúng mã <code>CH##</code> không. Tạo lại khung đầu bằng Nano Banana Pro với ảnh tham chiếu, rồi mới đưa sang Veo. Shot dài thì tách thành 2 shot ngắn.</div></details>
+      <details class="faq"><summary>Chi phí sắp chạm $400</summary><div>Sheet Ngân sách sẽ báo Cảnh báo. Producer báo Brand Approver <b>trước khi</b> chạy tiếp. Xem sheet Shot log, lọc <code>status = reject</code> để tìm shot đang "đốt tiền" và áp dụng ngay nhánh DỪNG của giới hạn 3+3.</div></details>
+      <details class="faq"><summary>Brand muốn thêm shot sau cổng 2</summary><div>Shot list đã khoá. Producer ước tính chi phí + thời gian shot mới, báo lại hạn giao, và chỉ làm khi Brand đồng ý cả hai.</div></details>
+      <details class="faq"><summary>File render có watermark nhìn thấy được</summary><div>Gần như chắc chắn file được tạo trên <b>Flow</b> hoặc Gemini app. Render lại qua Agent Platform. Không xoá watermark bằng hậu kỳ.</div></details>
+      <details class="faq"><summary>Có cần dùng Omni vì rẻ hơn và clip dài hơn?</summary><div>Được dùng cho <b>nháp</b> và thử chuyển động. Chưa dùng cho bản master cho tới khi Google xác nhận bằng văn bản Omni nằm trong diện bồi hoàn (mục V1).</div></details>
+      <details class="faq"><summary>Gem bịa giá hoặc claim</summary><div>Gem được dặn để <code>[CẦN XÁC NHẬN]</code> / <code>[CẦN CĂN CỨ]</code>. Nếu vẫn bịa: bổ sung dữ liệu vào Knowledge và thêm ví dụ vào Instructions. Mọi giá và claim đều qua Legal ở cổng 3.</div></details>
+      <details class="faq"><summary>Giọng TTS đọc sai tên riêng</summary><div>Viết theo cách đọc (VD "Đà Nẵng", không viết "DAD"), thêm dấu phẩy để ngắt nhịp. Vẫn sai → thay từ hoặc dùng người đọc thật cho câu đó.</div></details>
+    </section>
+
+    <!-- ============ BẢO TRÌ ============ -->
+    <section id="bao-tri">
+      <h2>Bảo trì kit</h2>
+      <div class="table-wrap"><table>
+        <tr><th>Việc</th><th>Tần suất</th><th>Ai</th><th>Ở đâu</th></tr>
+        <tr><td>Rà soát Model Registry: model mới, giá, ngày ngừng hỗ trợ</td><td>Hằng tháng</td><td>Producer</td><td>SOP mục 11</td></tr>
+        <tr><td>Cập nhật giá trong workbook và sinh lại</td><td>Khi giá đổi</td><td>Producer</td><td><code>scripts/build_workbook.py</code></td></tr>
+        <tr><td>Bổ sung prompt tốt vào thư viện prompt</td><td>Sau mỗi chiến dịch</td><td>AI Artist</td><td>03-prompt-structure.md</td></tr>
+        <tr><td>Cập nhật Brand Kit / Knowledge của Gem</td><td>Khi guideline, đội tàu bay, đường bay đổi</td><td>Producer</td><td>02-brand-kit-gem.md + Gem</td></tr>
+        <tr><td>Rà soát toàn bộ SOP</td><td>Sau pilot, sau đó mỗi quý</td><td>Producer + team</td><td>SOP mục 14</td></tr>
+      </table></div>
+
+      <h3>Sinh lại workbook</h3>
+      <div class="code"><button class="copy" data-copy="cmdBuild">Sao chép</button><pre id="cmdBuild">python3 -m venv .venv &amp;&amp; .venv/bin/pip install openpyxl
+.venv/bin/python scripts/build_workbook.py docs/templates</pre></div>
+      <p style="font-size:14px">Bảng giá nằm ở biến <code>PRICES</code> trong script; sheet QC đọc trực tiếp từ <code>06-qc-checklist.md</code>. Không ghi đè workbook của chiến dịch đang chạy.</p>
+
+      <div class="callout warn"><strong>Còn cần xác minh</strong>Thông tin model, giá và luật lấy từ tra cứu web ngày 12/11/2026, chưa đối chiếu văn bản gốc. Điểm chưa chắc nhất: Omni/Nano Banana/Lyria có được bồi hoàn không (V1) và hình thức nhãn AI theo Nghị định 142/2026 (V3). Danh sách đầy đủ ở SOP mục 12.</div>
+      <footer>Ad Kit · SOP v1.0 · cập nhật 12/11/2026</footer>
+    </section>
+  </main>
+</div>
+
+<script>
+(function () {
+  // ---------- theme ----------
+  var root = document.documentElement;
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+  var saved = store('adkit-theme');
+  if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved);
+  function effective() {
+    var t = root.getAttribute('data-theme');
+    if (t) return t;
+    return window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  function label() { document.getElementById('themeLabel').textContent = effective() === 'dark' ? 'Tối' : 'Sáng'; }
+  label();
+  document.getElementById('themeToggle').addEventListener('click', function () {
+    var next = effective() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next); store('adkit-theme', next); label();
+  });
+
+  // ---------- mobile nav ----------
+  var toc = document.getElementById('toc'), nt = document.getElementById('navToggle');
+  nt.addEventListener('click', function () {
+    var open = toc.classList.toggle('open'); nt.setAttribute('aria-expanded', open);
+  });
+  toc.addEventListener('click', function (e) { if (e.target.tagName === 'A') { toc.classList.remove('open'); nt.setAttribute('aria-expanded', false); } });
+
+  // ---------- active section ----------
+  var links = {}; toc.querySelectorAll('a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting && links[en.target.id]) {
+          Object.values(links).forEach(function (l) { l.classList.remove('active'); });
+          links[en.target.id].classList.add('active');
+        }
+      });
+    }, { rootMargin: '-80px 0px -65% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { io.observe(s); });
+  }
+
+  // ---------- role tabs ----------
+  var tabs = document.querySelectorAll('#roleTabs .tab');
+  function showRole(r) {
+    tabs.forEach(function (t) { t.setAttribute('aria-selected', t.dataset.role === r); });
+    document.querySelectorAll('[data-panel]').forEach(function (p) { p.hidden = p.dataset.panel !== r; });
+    store('adkit-role', r);
+  }
+  tabs.forEach(function (t) { t.addEventListener('click', function () { showRole(t.dataset.role); }); });
+  var savedRole = store('adkit-role'); if (savedRole && document.querySelector('[data-panel="' + savedRole + '"]')) showRole(savedRole);
+
+  // ---------- setup checklist ----------
+  var boxes = document.querySelectorAll('#setupList input');
+  var state = {}; try { state = JSON.parse(store('adkit-setup') || '{}') || {}; } catch (e) { state = {}; }
+  function refresh() {
+    var n = 0;
+    boxes.forEach(function (b) { b.closest('li').classList.toggle('done', b.checked); if (b.checked) n++; });
+    document.getElementById('setupBar').style.width = (n / boxes.length * 100) + '%';
+    document.getElementById('setupCount').textContent = n + '/' + boxes.length + ' việc' + (n === boxes.length ? ' — sẵn sàng chạy pilot 🎉' : '');
+  }
+  boxes.forEach(function (b) {
+    b.checked = !!state[b.id];
+    b.addEventListener('change', function () { state[b.id] = b.checked; store('adkit-setup', JSON.stringify(state)); refresh(); });
+  });
+  refresh();
+
+  // ---------- copy buttons ----------
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = document.getElementById(btn.dataset.copy).textContent;
+      function done(ok) { btn.textContent = ok ? 'Đã chép ✓' : 'Chọn & Ctrl+C'; setTimeout(function () { btn.textContent = 'Sao chép'; }, 1600); }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(fallback(text)); });
+      } else { done(fallback(text)); }
+    });
+  });
+  function fallback(text) {
+    var ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select(); var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta); return ok;
+  }
+
+  // ---------- cost calculator ----------
+  var P = { fast: [0.08, 0.10], std1080: [0.20, 0.40], std4k: [0.40, 0.60], nb21: 0.034, nbpro: 0.134, audioMisc: 2 };
+  function num(id) { var v = parseFloat(document.getElementById(id).value); return isFinite(v) && v > 0 ? v : 0; }
+  function money(v) { return '$' + v.toFixed(v < 100 ? 1 : 0); }
+  function calc() {
+    var shots = num('cShots'), dur = num('cDur'), f = num('cFast'), s = num('cStd'), hero = num('cHero');
+    var a = +document.getElementById('cAudio').value, res = document.getElementById('cRes').value;
+    var pf = P.fast[a], ps = (res === '4k' ? P.std4k : P.std1080)[a];
+    var rows = [
+      ['Nháp Veo Fast 720p', shots * dur * f * pf],
+      ['Bản cuối Veo Standard ' + (res === '4k' ? '4K' : '1080p'), shots * dur * s * ps],
+      ['Hero shot 9:16 (Fast + Standard)', hero * dur * (f * pf + s * ps)],
+      ['Ảnh Nano Banana 2.1', num('cImgFast') * P.nb21],
+      ['Ảnh Nano Banana Pro', num('cImgPro') * P.nbpro],
+      ['Nhạc Lyria + giọng đọc TTS', P.audioMisc]
+    ];
+    var t = document.getElementById('calcTable');
+    t.innerHTML = '<tr><th>Hạng mục</th><th>USD</th></tr>' + rows.map(function (r) { return '<tr><td>' + r[0] + '</td><td>' + money(r[1]) + '</td></tr>'; }).join('');
+    var total = rows.reduce(function (s, r) { return s + r[1]; }, 0);
+    document.getElementById('calcTotal').textContent = money(total);
+    var m = document.getElementById('calcMeter'), st = document.getElementById('calcStatus');
+    m.style.width = Math.min(total / 500 * 100, 100) + '%';
+    var css = getComputedStyle(root);
+    if (total >= 500) { m.style.background = css.getPropertyValue('--bad'); st.className = 'callout bad'; st.innerHTML = '<strong>Vượt trần $500</strong>Giảm số shot, số lần thử hoặc độ phân giải trước khi bắt đầu.'; }
+    else if (total >= 400) { m.style.background = css.getPropertyValue('--warn'); st.className = 'callout warn'; st.innerHTML = '<strong>Vùng cảnh báo</strong>Còn ít dự phòng cho shot khó. Báo Brand Approver trước.'; }
+    else { m.style.background = css.getPropertyValue('--ok'); st.className = 'callout info'; st.innerHTML = '<strong>Trong ngân sách</strong>Còn ~' + money(500 - total) + ' dự phòng cho shot khó.'; }
+    st.style.marginBottom = '0';
+  }
+  document.getElementById('calc').addEventListener('input', calc);
+  document.getElementById('themeToggle').addEventListener('click', calc);
+  calc();
+})();
+</script>
+</body>
+</html>

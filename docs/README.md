@@ -4,7 +4,7 @@ Bắt đầu từ **[guide.html](guide.html)** (mở bằng trình duyệt) — 
 
 | File | Nội dung | Ai dùng |
 |---|---|---|
-| [SOP.md](SOP.md) | Quy trình 9 bước, 3 cổng duyệt, vai trò, lịch 5 ngày, chi phí, pháp lý, Model Registry | Cả team |
+| [SOP.md](SOP.md) | Quy trình 9 bước, 4 cổng duyệt, vai trò, lịch 5 ngày + 1 dự phòng, chi phí, pháp lý, Model Registry | Cả team |
 | [pilot-plan.md](pilot-plan.md) | Chuẩn bị một lần + chạy thử SOP trên bộ social 15s | Producer |
 | [templates/01-brief.md](templates/01-brief.md) | Mẫu brief chiến dịch | Producer + Brand Approver |
 | [templates/02-brand-kit-gem.md](templates/02-brand-kit-gem.md) | Brand Kit + Instructions cho Gem viết ý tưởng/kịch bản/prompt | Producer, Copywriter |

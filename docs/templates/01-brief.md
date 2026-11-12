@@ -12,6 +12,7 @@
 | ⚠️ Brand Approver | |
 | ⚠️ Legal phụ trách | |
 | ⚠️ Producer | |
+| ⚠️ Director / Creative Lead | Người quyết chất lượng sáng tạo (SOP mục 4) |
 | ⚠️ Ngày bắt đầu / Ngày giao | |
 | Ngân sách AI (mặc định ≤ $500) | |
 
@@ -48,6 +49,14 @@
 | C15 — 15s 9:16 VI / EN | ☐ | | |
 | C06 — 6s 9:16 VI / EN | ☐ | | |
 | Khác (TV, màn hình sân bay, IFE…) | ☐ | | Nếu có TV → hỏi đài thông số (SOP V9) |
+
+**Chốt ngay ở brief (đổi về sau rất tốn kém):**
+
+| Mục | Lựa chọn | Ghi chú |
+|---|---|---|
+| ⚠️ Có phát TV không? | ☐ Không → timeline **24 fps** · ☐ Có → timeline **25 fps** từ đầu | SOP mục 2. Không đổi fps ở bước cuối |
+| ⚠️ Giọng đọc bản master VI | ☐ Người đọc thật (tên: ……) · ☐ Gemini TTS | Người thật → Producer book người đọc + phòng thu cho **Ngày 3** |
+| ⚠️ Giọng đọc bản EN | ☐ Người đọc thật · ☐ Gemini TTS | |
 
 ## E. Tư liệu thật có sẵn
 

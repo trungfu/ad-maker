@@ -26,12 +26,14 @@ Quy tắc chung:
 
 Đính kèm: ảnh nhân vật (`CH##`), ảnh tàu bay/cabin thật, style frame đã duyệt.
 
+> **Style frame ≠ khung đầu về màu.** Style frame thể hiện **look cuối cùng** (màu, tương phản) — dùng để duyệt và làm đích cho chỉnh màu; ở dòng `[STYLE]` thay phần màu trung tính bằng mô tả look mong muốn. **Khung đầu** cho Veo luôn giữ màu trung tính, tương phản mềm như mẫu dưới — vì file Veo 8-bit không chịu được việc đẩy màu mạnh ở hậu kỳ.
+
 ```text
 [SHOT] {shot type: wide / medium / close-up}, {camera angle}, {aspect ratio 16:9 or 9:16}.
 [SUBJECT] {CH01 from reference image} {pose / expression}.
 [SETTING] {location, using reference image of real cabin / destination}.
 [TIME & LIGHT] {time of day}, {light quality and direction}, {color temperature}.
-[STYLE] Match the attached style frame: {grade description}, {lens: e.g. 35mm, shallow depth of field}.
+[STYLE] {lens: e.g. 35mm, shallow depth of field}. Natural, neutral color grade with soft contrast; preserve highlight and shadow detail (final look is applied in post to match the style frame).
 [COMPOSITION] {subject placement}. Keep main subject centered (center-safe for 9:16 crop).
 [EXCLUDE] No text, no logos, no signage, no letters anywhere in frame.
 ```
@@ -51,10 +53,10 @@ Quy tắc chung:
 |---|---|---|
 | Model | `veo-3.1-fast-generate-001` | `veo-3.1-generate-001` |
 | Độ phân giải | 720p | 1080p (4K nếu master TV) |
-| Thời lượng | đúng thời lượng shot list (4/6/8s) | như nháp |
+| Thời lượng | **dài hơn** thời lượng dùng để có handles: dùng ≤ 4s → tạo 6s; dùng 5–6s → tạo 8s | như nháp |
 | Tỉ lệ | 16:9 (hero shot: thêm 9:16) | như nháp |
 | Tạo âm thanh | **Tắt** | **Tắt** (trừ khi shot list ghi cần) |
-| Seed | ghi lại | dùng seed của bản nháp tốt nhất |
+| Seed | ghi lại | ghi lại (seed chỉ tạo lại được trong **cùng model** — bản Standard có thể khác bản Fast, xem SOP Bước 5, V11) |
 
 **Prompt:**
 
@@ -64,7 +66,7 @@ Quy tắc chung:
 [SETTING] {where — must match first frame}.
 [LIGHT] {must match first frame}, {any change: "sunlight sweeps across her face"}.
 [MOTION DETAILS] {secondary motion: clouds drift, hair moves slightly}.
-[STYLE] Cinematic commercial, photorealistic, {grade}, 24fps natural motion blur.
+[STYLE] Cinematic commercial, photorealistic, natural neutral grade, soft contrast, no crushed blacks or clipped highlights, 24fps natural motion blur.
 [AUDIO] none
 ```
 
@@ -91,7 +93,8 @@ text, letters, logos, watermark, signage, distorted hands, extra fingers, warped
 [MOOD] {e.g. hopeful, warm, light anticipation building to uplift}
 [INSTRUMENTS] {e.g. soft piano, airy synth pads, light percussion entering at 0:10}
 [TEMPO] {e.g. 100 BPM}
-[STRUCTURE] {e.g. gentle intro 0–8s, build 8–22s, resolve and soft ending 22–30s}
+[STRUCTURE] {follow the script timing, e.g. gentle intro 0–8s, build 8–22s, resolve 22–26s}
+[ENDING] Clean, definite ending (button) at {26s — the moment the end card appears}, then 3–4s of quiet tail to leave room for the sonic logo. No fade-out.
 [CONSTRAINTS] Instrumental only, no vocals, no lyrics. Leave space for voice-over (mid frequencies not too busy).
 ```
 
